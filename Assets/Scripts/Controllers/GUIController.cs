@@ -74,7 +74,8 @@ public class GUIController : MonoBehaviour
     }
     public void OnMenuBtn()
     {
-        if (GameController.Instance.maxScore < GameController.Instance.score) { DataController.SaveFile(GameController.Instance.score, "score"); } 
+        if (GameController.Instance.maxScore < GameController.Instance.score) { DataController.SaveFile(GameController.Instance.score, "score"); }
+        Time.timeScale = 1;
         SceneManager.LoadScene(0);
     }
     public void OnExitBtn()
@@ -179,5 +180,11 @@ public class GUIController : MonoBehaviour
 
         PlayerPrefs.SetInt("fxMuted", state);
         PlayerPrefs.Save();
+    }
+
+    //skin choice 
+    public void OnSkinChangedBtn(int skinIndex)
+    {
+        ShopController.Instance.BuySkin(skinIndex);
     }
 }
