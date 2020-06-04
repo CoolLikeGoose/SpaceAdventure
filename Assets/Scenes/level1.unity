@@ -1324,14 +1324,14 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1244026381}
-        m_MethodName: OnSettingsBtn
-        m_Mode: 1
+        m_MethodName: OnChangeInterfaceBtn
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: main
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1084741082
@@ -1793,6 +1793,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2374282311330798378, guid: 2d5797b54e3aa8b488c92b4fee32b684,
         type: 3}
+      propertyPath: weapons.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2374282311330798378, guid: 2d5797b54e3aa8b488c92b4fee32b684,
+        type: 3}
       propertyPath: enemyLoot.Array.data[0]
       value: 
       objectReference: {fileID: 4137646885803632226, guid: 7f7befc1d4022b24c8d1e55d4e61348b,
@@ -1848,6 +1853,42 @@ PrefabInstance:
       propertyPath: coinPref
       value: 
       objectReference: {fileID: 8509942473021837195, guid: f9299e8e397f6e641b6d69af92a2b673,
+        type: 3}
+    - target: {fileID: 2374282311330798378, guid: 2d5797b54e3aa8b488c92b4fee32b684,
+        type: 3}
+      propertyPath: weapons.Array.data[0]
+      value: 
+      objectReference: {fileID: 3695949948882262909, guid: 09e9936f6cba78242a271c3220215d0e,
+        type: 3}
+    - target: {fileID: 2374282311330798378, guid: 2d5797b54e3aa8b488c92b4fee32b684,
+        type: 3}
+      propertyPath: weapons.Array.data[1]
+      value: 
+      objectReference: {fileID: 3582117239702109525, guid: abf8885b63385e24e8221d799613aa72,
+        type: 3}
+    - target: {fileID: 2374282311330798378, guid: 2d5797b54e3aa8b488c92b4fee32b684,
+        type: 3}
+      propertyPath: weapons.Array.data[2]
+      value: 
+      objectReference: {fileID: 6454667623830599174, guid: 8e1e18b2983dadb40a393b7e0bf20a93,
+        type: 3}
+    - target: {fileID: 2374282311330798378, guid: 2d5797b54e3aa8b488c92b4fee32b684,
+        type: 3}
+      propertyPath: weapons.Array.data[3]
+      value: 
+      objectReference: {fileID: 6454667623830599174, guid: 0f1000aa87aa53d4e9eb08f61bb40844,
+        type: 3}
+    - target: {fileID: 2374282311330798378, guid: 2d5797b54e3aa8b488c92b4fee32b684,
+        type: 3}
+      propertyPath: weapons.Array.data[4]
+      value: 
+      objectReference: {fileID: 123929159083868324, guid: 6c348a64cda2d0044afdf306969183e8,
+        type: 3}
+    - target: {fileID: 2374282311330798378, guid: 2d5797b54e3aa8b488c92b4fee32b684,
+        type: 3}
+      propertyPath: weapons.Array.data[5]
+      value: 
+      objectReference: {fileID: 123929159083868324, guid: 8474fd9cc604550429fbe8793fa41ed3,
         type: 3}
     - target: {fileID: 2374282311330798382, guid: 2d5797b54e3aa8b488c92b4fee32b684,
         type: 3}
@@ -2280,32 +2321,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1713744108}
   m_CullTransparentMesh: 0
---- !u!1 &1764392517 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4559560091673667229, guid: da504e5b03840664689a476567314a74,
-    type: 3}
-  m_PrefabInstance: {fileID: 1023591796}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1764392518
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1764392517}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cf1f5617f6a34248b4f0de8c593688a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weapons:
-  - {fileID: 3695949948882262909, guid: 09e9936f6cba78242a271c3220215d0e, type: 3}
-  - {fileID: 3582117239702109525, guid: abf8885b63385e24e8221d799613aa72, type: 3}
-  - {fileID: 6454667623830599174, guid: 8e1e18b2983dadb40a393b7e0bf20a93, type: 3}
-  - {fileID: 6454667623830599174, guid: 0f1000aa87aa53d4e9eb08f61bb40844, type: 3}
-  - {fileID: 123929159083868324, guid: 6c348a64cda2d0044afdf306969183e8, type: 3}
-  - {fileID: 123929159083868324, guid: 8474fd9cc604550429fbe8793fa41ed3, type: 3}
-  smoothFactor: 7
 --- !u!1 &1906445032
 GameObject:
   m_ObjectHideFlags: 0
@@ -2583,14 +2598,14 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1244026381}
-        m_MethodName: OnSettingsBtn
-        m_Mode: 1
+        m_MethodName: OnChangeInterfaceBtn
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: settings
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &2062346408
@@ -2713,14 +2728,14 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1244026381}
-        m_MethodName: OnSettingsBtn
-        m_Mode: 1
+        m_MethodName: OnChangeInterfaceBtn
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: main
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &2126359778

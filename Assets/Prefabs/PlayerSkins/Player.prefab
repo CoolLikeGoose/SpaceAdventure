@@ -4766,6 +4766,7 @@ GameObject:
   - component: {fileID: 8871574974788935391}
   - component: {fileID: 3882292023362513769}
   - component: {fileID: 3178943820648382261}
+  - component: {fileID: 2729372877937405841}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -4896,3 +4897,23 @@ PolygonCollider2D:
       - {x: -0.117149755, y: 0.11856237}
       - {x: -0.078101635, y: 0.3787768}
       - {x: 0.07716632, y: 0.37799293}
+--- !u!114 &2729372877937405841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4559560091673667229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cf1f5617f6a34248b4f0de8c593688a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapons:
+  - {fileID: 3695949948882262909, guid: 09e9936f6cba78242a271c3220215d0e, type: 3}
+  - {fileID: 3582117239702109525, guid: abf8885b63385e24e8221d799613aa72, type: 3}
+  - {fileID: 6454667623830599174, guid: 8e1e18b2983dadb40a393b7e0bf20a93, type: 3}
+  - {fileID: 6454667623830599174, guid: 0f1000aa87aa53d4e9eb08f61bb40844, type: 3}
+  - {fileID: 123929159083868324, guid: 6c348a64cda2d0044afdf306969183e8, type: 3}
+  - {fileID: 123929159083868324, guid: 8474fd9cc604550429fbe8793fa41ed3, type: 3}
+  smoothFactor: 7
