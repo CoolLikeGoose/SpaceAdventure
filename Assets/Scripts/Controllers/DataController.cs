@@ -7,73 +7,53 @@ using UnityEngine.SocialPlatforms.Impl;
 
 /// <summary>
 /// A class that implements data management
-/// 3 methods for [coins, score] -
+/// 3 methods for [coins, score, skins] -
 /// Load Save Delete
 /// </summary>
 public static class DataController
 {
-    //max score
-    public static int LoadScore()
+    /// <summary>
+    /// Load data
+    /// </summary>
+    /// <param name="file">score/coins</param>
+    /// <returns>saved data</returns>
+    public static int LoadFile(string file)
     {
-        string path = Application.persistentDataPath + "/score.goose";
-
-        if (File.Exists(path))
-        {
-            StreamReader scoredata = new StreamReader(path);
-            int score = Convert.ToInt32(scoredata.ReadLine());
-            scoredata.Close();
-
-            return score;
-        }
-        return 0;
-    }
-
-    public static void SaveScore(int score)
-    {
-        string path = Application.persistentDataPath + "/score.goose";
-
-        StreamWriter scoredata = new StreamWriter(path);
-        scoredata.WriteLine(score);
-        scoredata.Close();
-    }
-
-    public static void DeleteScore()
-    {
-        string path = Application.persistentDataPath + "/score.goose";
-
-        File.Delete(path);
-    }
-
-    //coins
-    public static int LoadCoins()
-    {
-        string path = Application.persistentDataPath + "/coins.goose";
+        string path = Application.persistentDataPath + $"/{file}.goose";
 
         if (File.Exists(path))
         {
             StreamReader coinsdata = new StreamReader(path);
-            int coins = Convert.ToInt32(coinsdata.ReadLine());
+            int count = Convert.ToInt32(coinsdata.ReadLine());
             coinsdata.Close();
 
-            return coins;
+            return count;
         }
         return 0;
     }
 
-    public static void SaveCoins(int coins)
+    /// <summary>
+    /// Save data
+    /// </summary>
+    /// <param name="count">data to save</param>
+    /// <param name="file">score/coins</param>
+    public static void SaveFile(int count, string file)
     {
-        string path = Application.persistentDataPath + "/coins.goose";
+        string path = Application.persistentDataPath + $"/{count}.goose";
 
         StreamWriter coinsdata = new StreamWriter(path);
-        coinsdata.WriteLine(coins);
+        coinsdata.WriteLine(count);
         coinsdata.Close();
     }
 
-    public static void DeleteCoins()
+    /// <summary>
+    /// Delete data
+    /// </summary>
+    /// <param name="file">score/coins</param>
+    public static void DeleteFile(string file)
     {
-        string path = Application.persistentDataPath + "/coins.goose";
+        string path = Application.persistentDataPath + $"/{file}.goose";
 
         File.Delete(path);
     }
-    
 }
