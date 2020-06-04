@@ -18,6 +18,7 @@ public class GameController : MonoBehaviour
     //player settings
     public float playerShootDelay = .25f;
     public float playerLaserSpeed = .2f;
+    public GameObject[] weapons = null;
 
     public GameObject asteroidExplosion;
 
@@ -65,8 +66,8 @@ public class GameController : MonoBehaviour
 
         Instance = this;
 
-        maxScore = DataController.LoadScore();
-        coins = DataController.LoadCoins();
+        maxScore = DataController.LoadFile("score");
+        coins = DataController.LoadFile("coins");
     }
     
     private void Start()
@@ -87,7 +88,6 @@ public class GameController : MonoBehaviour
     {
         //speedup; max speedup = 5
         if (!nowSceneMenu && gameSpeed < 5) { gameSpeed += speedUpFactor; }
-        Debug.Log(gameSpeed);
     }
 
     //needs to call coroutine 
@@ -97,7 +97,7 @@ public class GameController : MonoBehaviour
     /// <param name="mode">"death" for standart game over (with death screen and and a two second pause)</param>
     public void GameOver(string mode)
     {
-        DataController.SaveCoins(coins);
+        DataController.SaveFile(coins, "coins");
         StartCoroutine(GameOverCor(mode));
     }
 

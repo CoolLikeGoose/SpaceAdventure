@@ -18,6 +18,7 @@ public class GUIController : MonoBehaviour
 
     [SerializeField] private GameObject main = null;
     [SerializeField] private GameObject settings = null;
+    [SerializeField] private GameObject shop = null;
 
     [SerializeField] private Sprite unMuteIcon = null;
     [SerializeField] private Sprite muteIcon = null;
@@ -57,12 +58,13 @@ public class GUIController : MonoBehaviour
         set { coinsLabel.text = $"x {value}"; }
     }
 
-    private bool activeMain = true;
+    private GameObject activeWindow;
 
  
     private void Awake()
     {
         Instance = this;
+        activeWindow = main;
     }
 
     //Buttons methods
@@ -72,7 +74,7 @@ public class GUIController : MonoBehaviour
     }
     public void OnMenuBtn()
     {
-        if (GameController.Instance.maxScore < GameController.Instance.score) { DataController.SaveScore(GameController.Instance.score); } 
+        if (GameController.Instance.maxScore < GameController.Instance.score) { DataController.SaveFile(GameController.Instance.score, "score"); } 
         SceneManager.LoadScene(0);
     }
     public void OnExitBtn()
@@ -82,26 +84,38 @@ public class GUIController : MonoBehaviour
        
     public void OnDeleteScoreBtn()
     {
-        DataController.DeleteScore();
+        DataController.DeleteFile("score");
         scoreLabel.text = "MAX DESTROYED: 0";
     }
 
     public void OnDeleteCoinsBtn()
     {
-        DataController.DeleteCoins();
+        DataController.DeleteFile("coins");
         coinsLabel.text = "x0";
     }
 
-    public void OnSettingsBtn()
+    public void OnChangeInterfaceBtn(string window)
     {
         if (!GameController.Instance.nowSceneMenu)
         {
-            if (activeMain) { Time.timeScale = 0; }
+            if (window == "settings") { Time.timeScale = 0; }
             else { Time.timeScale = 1; }
         }
-        activeMain = !activeMain;
-        main.SetActive(activeMain);
-        settings.SetActive(!activeMain);
+
+        activeWindow.SetActive(false);
+        switch (window)
+        {
+            case "main":
+                activeWindow = main;
+                break;
+            case "settings":
+                activeWindow = settings;
+                break;
+            case "shop":
+                activeWindow = shop;
+                break;
+        }
+        activeWindow.SetActive(true);
     }
 
     /// <summary>

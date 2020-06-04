@@ -7,14 +7,19 @@ using UnityEngine.EventSystems;
 /// </summary>
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private GameObject[] weapons = null;
+    [SerializeField] private int skinIndex;
+
+    //[SerializeField] private GameObject[] weapons = null;
     [SerializeField] private float smoothFactor = 7f;
+
+    private GameObject[] weapons;
 
     private int curWeaponIndex = 0;
     private int bulletsLeft = 0;
 
     private void Start()
     {
+        weapons = GameController.Instance.weapons;
         StartCoroutine(WeaponShoot());
     }
 
