@@ -25,9 +25,14 @@ public class GameController : MonoBehaviour
     public GameObject[] enemyLoot;
     public GameObject coinPref;
 
+    //Game speedup during the game
+    [SerializeField] private float speedUpFactor = 1;
+    [NonSerialized] public float gameSpeed = 1;
+
     //
     [NonSerialized] public bool isGameActive = true;
 
+    //score and coins
     public int score    
     {
         get { return _score; }
@@ -45,13 +50,19 @@ public class GameController : MonoBehaviour
     [NonSerialized] public int maxScore;
     [NonSerialized] public int coins = 0;
 
+    //music DELETE
     [NonSerialized] public bool fxMuted = false;
     [NonSerialized] public bool musicMuted = false;
+
+    //check if now scene == menu
+    [NonSerialized] public bool nowSceneMenu;
 
     public static GameController Instance { get; private set; }
 
     private void Awake()
     {
+        nowSceneMenu = SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(0);
+
         Instance = this;
 
         maxScore = DataController.LoadScore();
@@ -61,7 +72,7 @@ public class GameController : MonoBehaviour
     private void Start()
     {
         //display maxScore and coins if now screen - menu
-        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(0))
+        if (nowSceneMenu)
         {
             GUIController.Instance.scoreSet = maxScore;
             GUIController.Instance.coinSet = coins;
@@ -70,6 +81,13 @@ public class GameController : MonoBehaviour
         //mute FX/music if you muted them before
         GUIController.Instance.OnFXMute(PlayerPrefs.GetInt("fxMuted"));
         GUIController.Instance.OnMusicMute(PlayerPrefs.GetInt("musicMuted"));
+    }
+
+    private void Update()
+    {
+        //speedup; max speedup = 5
+        if (!nowSceneMenu && gameSpeed < 5) { gameSpeed += speedUpFactor; }
+        Debug.Log(gameSpeed);
     }
 
     //needs to call coroutine 

@@ -58,6 +58,7 @@ public class GUIController : MonoBehaviour
     }
 
     private bool activeMain = true;
+
  
     private void Awake()
     {
@@ -93,7 +94,7 @@ public class GUIController : MonoBehaviour
 
     public void OnSettingsBtn()
     {
-        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(1))
+        if (!GameController.Instance.nowSceneMenu)
         {
             if (activeMain) { Time.timeScale = 0; }
             else { Time.timeScale = 1; }

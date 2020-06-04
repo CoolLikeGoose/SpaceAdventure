@@ -21,7 +21,7 @@ public class SmallObjectMov : MonoBehaviour
     }
     void Update()
     {
-        transform.Translate(new Vector2(0, speed * Time.deltaTime));
+        transform.Translate(new Vector2(0, speed * Time.deltaTime * GameController.Instance.gameSpeed));
     }
     private void LateUpdate()
     {

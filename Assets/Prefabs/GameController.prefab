@@ -50,6 +50,10 @@ MonoBehaviour:
   muteIcon: {fileID: 21300000, guid: ae7e4a4bcfe7aa44daa9a42020f1ca7d, type: 3}
   ObjFXmuteIcon: {fileID: 0}
   ObjMusicMuteIcon: {fileID: 0}
+  gameOverPopup: {fileID: 0}
+  scoreLabel: {fileID: 0}
+  coinsLabel: {fileID: 0}
+  finalScoreLabel: {fileID: 0}
 --- !u!114 &2374282311330798378
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,7 +66,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b85220891a92f13438690119aa77f12a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backGroundSpeed: -2.5
   EnemySpeed: -3
   enemySpawnDelay: 0.5
   enemyShootDelay: 1.5
@@ -73,7 +76,4 @@ MonoBehaviour:
     type: 3}
   enemyLoot: []
   coinPref: {fileID: 0}
-  scoreLabel: {fileID: 0}
-  gameOverPopup: {fileID: 0}
-  finalScoreLabel: {fileID: 0}
-  coinsLabel: {fileID: 0}
+  speedUpFactor: 0.0001

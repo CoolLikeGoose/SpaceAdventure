@@ -38,7 +38,7 @@ public class AsteroidController : MonoBehaviour
 
     private void AsteroidMove()
     {
-        transform.Translate(new Vector2(0, speed * Time.deltaTime));
+        transform.Translate(new Vector2(0, speed * Time.deltaTime * GameController.Instance.gameSpeed));
     }
 
     private void AsteroidRotate()

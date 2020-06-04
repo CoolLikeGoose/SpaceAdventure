@@ -29,7 +29,7 @@ public class EnemyController : MonoBehaviour
 
     private void Update()
     {
-        transform.Translate(new Vector2(0, speed * Time.deltaTime * 1.2f));
+        transform.Translate(new Vector2(0, speed * Time.deltaTime * 1.2f * GameController.Instance.gameSpeed));
     }
 
     private IEnumerator WeaponShoot()
@@ -40,7 +40,7 @@ public class EnemyController : MonoBehaviour
 
         if (GameController.Instance.isGameActive)
         {
-            yield return new WaitForSeconds(GameController.Instance.enemyShootDelay);
+            yield return new WaitForSeconds(GameController.Instance.enemyShootDelay/GameController.Instance.gameSpeed);
             StartCoroutine(WeaponShoot());
         }
 
