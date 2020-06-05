@@ -58,6 +58,9 @@ public class GameController : MonoBehaviour
     //check if now scene == menu
     [NonSerialized] public bool nowSceneMenu;
 
+    //controled by ShopController
+    public GameObject activeShip = null;
+
     public static GameController Instance { get; private set; }
 
     private void Awake()
@@ -77,6 +80,10 @@ public class GameController : MonoBehaviour
         {
             GUIController.Instance.scoreSet = maxScore;
             GUIController.Instance.coinSet = coins;
+        }
+        else
+        {
+            Instantiate(ShopController.Instance.shipSkins[PlayerPrefs.GetInt("activeShipSkin", 0)], new Vector2(0, -3), Quaternion.identity);
         }
 
         //mute FX/music if you muted them before

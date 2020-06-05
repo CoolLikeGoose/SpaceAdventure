@@ -105,7 +105,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 1
+  moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -4768,7 +4768,7 @@ GameObject:
   - component: {fileID: 3178943820648382261}
   - component: {fileID: 2729372877937405841}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Player7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4828,7 +4828,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: 21300000, guid: 9b0559d29ea84b342ab21089b8241fa6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: dbf5d1b7ad3cc134baa9a243ddce857a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -4870,14 +4870,14 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.99, y: 0.75}
+    oldSize: {x: 1.12, y: 0.75}
     newSize: {x: 0.99, y: 0.75}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -4885,18 +4885,15 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.119008645, y: 0.11496785}
-      - {x: 0.35747537, y: -0.022286482}
-      - {x: 0.4836993, y: 0.06858243}
-      - {x: 0.45532256, y: -0.2373113}
-      - {x: 0.07035808, y: -0.3730974}
-      - {x: -0.07160394, y: -0.37716958}
-      - {x: -0.44451326, y: -0.225627}
-      - {x: -0.4830606, y: 0.056794778}
-      - {x: -0.3620336, y: -0.03385324}
-      - {x: -0.117149755, y: 0.11856237}
-      - {x: -0.078101635, y: 0.3787768}
-      - {x: 0.07716632, y: 0.37799293}
+    - - {x: 0.54394805, y: -0.05916243}
+      - {x: 0.1282402, y: 0.1673181}
+      - {x: -0.0075972993, y: 0.3969741}
+      - {x: -0.10935703, y: 0.18620141}
+      - {x: -0.5545065, y: -0.055344082}
+      - {x: -0.3835194, y: -0.34753245}
+      - {x: -0.14999999, y: -0.375}
+      - {x: 0.14, y: -0.375}
+      - {x: 0.37218842, y: -0.3330259}
 --- !u!114 &2729372877937405841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4909,11 +4906,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cf1f5617f6a34248b4f0de8c593688a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapons:
-  - {fileID: 3695949948882262909, guid: 09e9936f6cba78242a271c3220215d0e, type: 3}
-  - {fileID: 3582117239702109525, guid: abf8885b63385e24e8221d799613aa72, type: 3}
-  - {fileID: 6454667623830599174, guid: 8e1e18b2983dadb40a393b7e0bf20a93, type: 3}
-  - {fileID: 6454667623830599174, guid: 0f1000aa87aa53d4e9eb08f61bb40844, type: 3}
-  - {fileID: 123929159083868324, guid: 6c348a64cda2d0044afdf306969183e8, type: 3}
-  - {fileID: 123929159083868324, guid: 8474fd9cc604550429fbe8793fa41ed3, type: 3}
+  skinIndex: 1
   smoothFactor: 7

@@ -95,6 +95,11 @@ public class GUIController : MonoBehaviour
         coinsLabel.text = "x0";
     }
 
+    public void OnDeleteSkinsBtn()
+    {
+        ShopController.Instance.OnDeleteSkins();
+    }
+
     public void OnChangeInterfaceBtn(string window)
     {
         if (!GameController.Instance.nowSceneMenu)
@@ -108,17 +113,27 @@ public class GUIController : MonoBehaviour
         {
             case "main":
                 activeWindow = main;
+                turnCoinsLabel(true);
                 break;
             case "settings":
                 activeWindow = settings;
+                turnCoinsLabel(false);
                 break;
             case "shop":
                 activeWindow = shop;
+                turnCoinsLabel(true);
                 break;
         }
         activeWindow.SetActive(true);
     }
-
+    
+    private void turnCoinsLabel(bool state)
+    {
+        if (GameController.Instance.nowSceneMenu)
+        {
+            coinsLabel.transform.parent.gameObject.SetActive(state);
+        }
+    }
     /// <summary>
     /// Mute music
     /// </summary>

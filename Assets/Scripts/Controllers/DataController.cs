@@ -23,9 +23,9 @@ public static class DataController
 
         if (File.Exists(path))
         {
-            StreamReader coinsdata = new StreamReader(path);
-            int count = Convert.ToInt32(coinsdata.ReadLine());
-            coinsdata.Close();
+            StreamReader data = new StreamReader(path);
+            int count = Convert.ToInt32(data.ReadLine());
+            data.Close();
 
             return count;
         }
@@ -39,11 +39,11 @@ public static class DataController
     /// <param name="file">score/coins</param>
     public static void SaveFile(int count, string file)
     {
-        string path = Application.persistentDataPath + $"/{count}.goose";
+        string path = Application.persistentDataPath + $"/{file}.goose";
 
-        StreamWriter coinsdata = new StreamWriter(path);
-        coinsdata.WriteLine(count);
-        coinsdata.Close();
+        StreamWriter data = new StreamWriter(path);
+        data.WriteLine(count);
+        data.Close();
     }
 
     /// <summary>
@@ -55,5 +55,35 @@ public static class DataController
         string path = Application.persistentDataPath + $"/{file}.goose";
 
         File.Delete(path);
+    }
+
+    //special method for skins
+    public static List<int> LoadBoughtSkins()
+    {
+        string path = Application.persistentDataPath + $"/skins.goose";
+        List<int> skinsData = new List<int>();
+
+        if (File.Exists(path))
+        {
+            StreamReader data = new StreamReader(path);
+            string line;
+            while ((line = data.ReadLine()) != null)
+            {
+                skinsData.Add(Convert.ToInt32(line));
+            }
+            data.Close();
+
+            return skinsData;
+        }
+        return null;
+    }
+
+    public static void SaveBoughtSkins(int skinIndex)
+    {
+        string path = Application.persistentDataPath + $"/skins.goose";
+
+        StreamWriter coinsdata = new StreamWriter(path, true);
+        coinsdata.WriteLine(skinIndex);
+        coinsdata.Close();
     }
 }
