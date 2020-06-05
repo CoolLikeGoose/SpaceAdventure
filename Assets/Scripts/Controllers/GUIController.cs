@@ -96,6 +96,7 @@ public class GUIController : MonoBehaviour
     {
         DataController.DeleteFile("coins");
         coinsLabel.text = "x0";
+        GameController.Instance.coins = 0;
     }
 
     public void OnDeleteSkinsBtn()
