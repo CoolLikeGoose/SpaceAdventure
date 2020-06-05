@@ -13,8 +13,11 @@ public class AsteroidController : MonoBehaviour
     private float randomRotation;
 
     private GameObject explosion;
+    private GameObject damage;
 
     private Renderer r;
+
+    private int hp;
 
     private void Start()
     {
@@ -22,11 +25,18 @@ public class AsteroidController : MonoBehaviour
         r = GetComponentInChildren<Renderer>();
 
         explosion = GameController.Instance.asteroidExplosion;
+        damage = GameController.Instance.asteroidHitParticles;
+
         speed = GameController.Instance.EnemySpeed;
         child = transform.GetChild(0);
 
-        float randomScale = Random.Range(0.95f, 1.05f);
+        float randomScale = Random.Range(0.7f, 1.3f);
         transform.localScale = new Vector3(randomScale, randomScale, randomScale);
+
+        //hp depends from scale
+        if (randomScale < 0.9f) { hp = 1; }
+        else if (randomScale < 1.1f) { hp = 2; }
+        else { hp = 3; }
 
         randomRotation = Random.Range(-100, 100);
     }
@@ -50,20 +60,34 @@ public class AsteroidController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("laser"))
         {
-            GameController.Instance.score++;
+            Destroy(collision.gameObject);
 
-            Destroy(collision.gameObject);           
-            
-            //explosion
-            Instantiate(explosion, transform.position, Quaternion.identity);
-
-            //loot
-            if (Random.Range(0, 100) < 10) { Instantiate(GameController.Instance.coinPref, transform.position, Quaternion.identity); }
-
-            //sound
-            if (r.isVisible) { SoundController.Instance.EnemyExplosion(); }
-                
-            Destroy(gameObject);
+            DamageAsteroid();
         }
+    }
+
+    private void DamageAsteroid()
+    {
+        hp -= GameController.Instance.playerDamage;
+        if (hp <= 0) { DestroyAsteroid(); }
+
+        //Damage particles
+        Instantiate(damage, transform.position, Quaternion.identity);
+    }
+
+    private void DestroyAsteroid()
+    {
+        GameController.Instance.score++;
+
+        //explosion
+        Instantiate(explosion, transform.position, Quaternion.identity);
+
+        //loot
+        if (Random.Range(0, 100) < 30) { Instantiate(GameController.Instance.coinPref, transform.position, Quaternion.identity); }
+
+        //sound
+        if (r.isVisible) { SoundController.Instance.EnemyExplosion(); }
+
+        Destroy(gameObject);
     }
 }

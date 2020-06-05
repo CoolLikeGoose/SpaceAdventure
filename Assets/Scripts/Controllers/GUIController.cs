@@ -19,6 +19,7 @@ public class GUIController : MonoBehaviour
     [SerializeField] private GameObject main = null;
     [SerializeField] private GameObject settings = null;
     [SerializeField] private GameObject shop = null;
+    [SerializeField] private GameObject info = null;
 
     [SerializeField] private Sprite unMuteIcon = null;
     [SerializeField] private Sprite muteIcon = null;
@@ -126,6 +127,10 @@ public class GUIController : MonoBehaviour
             case "shop":
                 activeWindow = shop;
                 turnCoinsLabel(true);
+                break;
+            case "info":
+                activeWindow = info;
+                turnCoinsLabel(false);
                 break;
         }
         activeWindow.SetActive(true);

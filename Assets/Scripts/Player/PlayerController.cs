@@ -62,12 +62,18 @@ public class PlayerController : MonoBehaviour
             bulletsLeft = data.amountBullets;
 
             Destroy(collision.gameObject);
+
+            SoundController.Instance.GearUp();
+
             return;
         }
         else if (collision.tag == "coin")
         {
             Destroy(collision.gameObject);
             GameController.Instance.coins++;
+
+            SoundController.Instance.CoinCollected();
+
             return;
         }
 

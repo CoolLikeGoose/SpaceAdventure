@@ -21,6 +21,7 @@ public class GameController : MonoBehaviour
     public GameObject[] weapons = null;
 
     public GameObject asteroidExplosion;
+    public GameObject asteroidHitParticles;
 
     //loot
     public GameObject[] enemyLoot;
@@ -58,6 +59,8 @@ public class GameController : MonoBehaviour
     //check if now scene == menu
     [NonSerialized] public bool nowSceneMenu;
 
+    [NonSerialized] public int playerDamage = 1;
+
     //controled by ShopController
     public GameObject activeShip = null;
 
@@ -71,6 +74,8 @@ public class GameController : MonoBehaviour
 
         maxScore = DataController.LoadFile("score");
         coins = DataController.LoadFile("coins");
+
+        playerDamage = PlayerPrefs.GetInt("playerDamage", 1);
     }
     
     private void Start()
@@ -89,6 +94,7 @@ public class GameController : MonoBehaviour
         //mute FX/music if you muted them before
         GUIController.Instance.OnFXMute(PlayerPrefs.GetInt("fxMuted"));
         GUIController.Instance.OnMusicMute(PlayerPrefs.GetInt("musicMuted"));
+
     }
 
     private void Update()

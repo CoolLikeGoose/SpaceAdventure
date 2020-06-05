@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.XR.WSA.Input;
 
 /// <summary>
 /// Manages all changes in the sounds
@@ -14,7 +15,7 @@ public class SoundController : MonoBehaviour
 
     [SerializeField] private AudioClip enemyExplosion = null;
     [SerializeField] private AudioClip playerExplosion = null;
-    [SerializeField] private AudioClip asteroidExplosion = null;
+    [SerializeField] private AudioClip asteroidHit = null;
 
     [SerializeField] private AudioClip playerLaser = null;
     [SerializeField] private AudioClip enemyLaser = null;
@@ -56,12 +57,28 @@ public class SoundController : MonoBehaviour
     //Methods for start sound FX
     public void EnemyExplosion()
     {
+        fXsource.pitch = Random.Range(0.9f, 1.1f);
         fXsource.PlayOneShot(enemyExplosion);
     }
 
     public void PlayerExplosion()
     {
         fXsource.PlayOneShot(playerExplosion);
+    }
+
+    public void AsteroidHit()
+    {
+        fXsource.PlayOneShot(asteroidHit);
+    }
+
+    public void CoinCollected()
+    {
+        fXsource.PlayOneShot(coinSound);
+    }
+
+    public void GearUp()
+    {
+        fXsource.PlayOneShot(gunSound);
     }
 
     /// <summary>
