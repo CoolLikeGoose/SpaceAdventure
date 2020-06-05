@@ -25,6 +25,6 @@ public class SmallObjectMov : MonoBehaviour
     }
     private void LateUpdate()
     {
-        if (hasChilds && transform.childCount == 0) { Destroy(gameObject); }
+        if (hasChilds && transform.childCount == 0 || transform.position.y < -15) { Destroy(gameObject); }
     }
 }
