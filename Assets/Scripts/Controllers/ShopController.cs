@@ -41,9 +41,6 @@ public class ShopController : MonoBehaviour
 
     public void BuySkin(int skinIndex)
     {
-        //glow
-        GlowSelectedSkin(skinIndex);
-
         //check if already bought
         List<int> loadedSkins = DataController.LoadBoughtSkins();
         if (loadedSkins != null && loadedSkins.Contains(skinIndex)) { SaveSkinChange(skinIndex); return; }
@@ -59,9 +56,11 @@ public class ShopController : MonoBehaviour
             nowActiveBtn.transform.GetChild(1).gameObject.SetActive(false);
 
             DataController.SaveBoughtSkins(skinIndex);
-        }
 
-        SaveSkinChange(skinIndex);
+            SaveSkinChange(skinIndex);
+
+            return;
+        }
     }
 
     public void GlowSelectedSkin(int skinIndex)
@@ -76,6 +75,7 @@ public class ShopController : MonoBehaviour
 
     public void SaveSkinChange(int skinIndex)
     {
+        GlowSelectedSkin(skinIndex);
         //save ship
         PlayerPrefs.SetInt("activeShipSkin", skinIndex);
         PlayerPrefs.Save();
