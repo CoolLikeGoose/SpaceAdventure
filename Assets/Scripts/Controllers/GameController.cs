@@ -104,7 +104,6 @@ public class GameController : MonoBehaviour
     /// <param name="mode">"death" for standart game over (with death screen and and a two second pause)</param>
     public void GameOver(string mode)
     {
-        DataController.SaveFile(coins, "coins");
         StartCoroutine(GameOverCor(mode));
     }
 

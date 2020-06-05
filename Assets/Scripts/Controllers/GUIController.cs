@@ -76,6 +76,9 @@ public class GUIController : MonoBehaviour
     {
         if (GameController.Instance.maxScore < GameController.Instance.score) { DataController.SaveFile(GameController.Instance.score, "score"); }
         Time.timeScale = 1;
+
+        DataController.SaveFile(GameController.Instance.coins, "coins");
+
         SceneManager.LoadScene(0);
     }
     public void OnExitBtn()
