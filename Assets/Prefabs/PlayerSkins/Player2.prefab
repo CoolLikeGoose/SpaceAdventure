@@ -133,5 +133,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cf1f5617f6a34248b4f0de8c593688a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skinIndex: 1
+  skinIndex: 2
   smoothFactor: 7
+  shieldsPrefs:
+  - {fileID: 1963942001608519577, guid: 67cd63b3e08db5841b96ce51cdcdc8eb, type: 3}
+  - {fileID: 5046634859975338924, guid: 6c62ebbd4cc9fc44ba4cc645c2d8c272, type: 3}
+  - {fileID: 9153784341771011980, guid: bc57ec91a421fd5448d2949c3fde7e7a, type: 3}

@@ -13,9 +13,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float smoothFactor = 7f;
 
     private GameObject[] weapons;
+    [SerializeField] private GameObject[] shieldsPrefs;
 
     private int curWeaponIndex = 0;
     private int bulletsLeft = 0;
+
+    private int curShieldIndex = -1;
+    private GameObject curShield = null;
 
     private void Start()
     {
@@ -55,6 +59,12 @@ public class PlayerController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "laser" || collision.tag == "GameController") { return; }
+        else if (collision.tag == "shield")
+        {
+            Destroy(collision.gameObject);
+            OnShieldUp();
+            return;
+        }
         else if (collision.tag == "capsule")
         {
             CapsuleMov data = collision.gameObject.GetComponent<CapsuleMov>();
@@ -77,6 +87,22 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
+        if (curShieldIndex != -1)
+        {
+            AsteroidController asteroid = collision.gameObject.GetComponent<AsteroidController>();
+            if (asteroid != null)
+            {
+                asteroid.DestroyAsteroid();
+            }
+            EnemyController enemy = collision.gameObject.GetComponent<EnemyController>();
+            if (enemy != null)
+            {
+                enemy.DestroyEnemy();
+            }
+            OnShieldDown();
+            return;
+        }
+
         GameController.Instance.GameOver("death");
 
         Destroy(collision.gameObject);
@@ -88,5 +114,32 @@ public class PlayerController : MonoBehaviour
         SoundController.Instance.PlayerExplosion();
 
         Destroy(gameObject);
+    }
+
+    public void OnShieldUp()
+    {
+        if (curShield != null) { Destroy(curShield.gameObject); }
+        
+        curShieldIndex = Mathf.Clamp(curShieldIndex + 1, -1, 2);
+
+        GameObject shield = Instantiate(shieldsPrefs[curShieldIndex], transform.position, Quaternion.identity);
+        shield.transform.SetParent(gameObject.transform);
+
+        curShield = shield;
+    }
+
+    public void OnShieldDown()
+    {
+        Destroy(curShield.gameObject);
+
+        curShieldIndex = Mathf.Clamp(curShieldIndex - 1, -1, 2);
+
+        if (curShieldIndex != -1)
+        {
+            GameObject shield = Instantiate(shieldsPrefs[curShieldIndex], transform.position, Quaternion.identity);
+            shield.transform.SetParent(gameObject.transform);
+
+            curShield = shield;
+        }
     }
 }   

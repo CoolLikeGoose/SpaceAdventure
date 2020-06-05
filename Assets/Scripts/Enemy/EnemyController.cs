@@ -1,6 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 /// <summary>
@@ -51,20 +49,25 @@ public class EnemyController : MonoBehaviour
     {
         if (collision.tag == "laser")
         {
-            GameController.Instance.score++;
-
             Destroy(collision.gameObject);
 
-            //explosion
-            Instantiate(GameController.Instance.asteroidExplosion, transform.position, Quaternion.identity);
-
-            //loot
-            if (Random.Range(0,100) < 25) { Instantiate(loot[Random.Range(0, loot.Length)], transform.position, Quaternion.identity); }
-            
-            //sound
-            if (r.isVisible) { SoundController.Instance.EnemyExplosion(); }
-
-            Destroy(gameObject);    
+            DestroyEnemy();
         }
+    }
+
+    public void DestroyEnemy()
+    {
+        GameController.Instance.score++;
+
+        //explosion
+        Instantiate(GameController.Instance.asteroidExplosion, transform.position, Quaternion.identity);
+
+        //loot
+        if (Random.Range(0, 100) < 25) { Instantiate(loot[Random.Range(0, loot.Length)], transform.position, Quaternion.identity); }
+
+        //sound
+        if (r.isVisible) { SoundController.Instance.EnemyExplosion(); }
+
+        Destroy(gameObject);
     }
 }

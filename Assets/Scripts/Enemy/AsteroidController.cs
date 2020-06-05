@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
 /// Manages Asteroid movement/rotation/destruction
@@ -75,7 +73,7 @@ public class AsteroidController : MonoBehaviour
         Instantiate(damage, transform.position, Quaternion.identity);
     }
 
-    private void DestroyAsteroid()
+    public void DestroyAsteroid()
     {
         GameController.Instance.score++;
 
@@ -84,6 +82,8 @@ public class AsteroidController : MonoBehaviour
 
         //loot
         if (Random.Range(0, 100) < 30) { Instantiate(GameController.Instance.coinPref, transform.position, Quaternion.identity); }
+        //chance (70*7) ~ 5%
+        else if (Random.Range(0, 100) < 7) { Instantiate(GameController.Instance.shieldPref, transform.position, Quaternion.identity); }
 
         //sound
         if (r.isVisible) { SoundController.Instance.EnemyExplosion(); }

@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.XR.WSA.Input;
 
 /// <summary>
 /// Manages all changes in the sounds

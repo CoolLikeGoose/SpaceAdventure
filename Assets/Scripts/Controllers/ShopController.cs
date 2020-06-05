@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +9,7 @@ public class ShopController : MonoBehaviour
     public static ShopController Instance { get; private set; }
 
     [Tooltip("The index of the buttons in the array must match their number")]
-    [SerializeField] private List<GameObject> shopButtons;
+    [SerializeField] private List<GameObject> shopButtons = null;
     [Tooltip("The index of the ships in the array must match their number")]
     public List<GameObject> shipSkins;
 

@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System;
@@ -26,6 +25,7 @@ public class GameController : MonoBehaviour
     //loot
     public GameObject[] enemyLoot;
     public GameObject coinPref;
+    public GameObject shieldPref;
 
     //Game speedup during the game
     [SerializeField] private float speedUpFactor = 1;

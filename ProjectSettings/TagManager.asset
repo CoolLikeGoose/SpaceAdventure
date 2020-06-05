@@ -7,6 +7,7 @@ TagManager:
   - laser
   - capsule
   - coin
+  - shield
   layers:
   - Default
   - TransparentFX

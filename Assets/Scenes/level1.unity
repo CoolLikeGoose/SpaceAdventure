@@ -1812,6 +1812,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4559560091673667229, guid: da504e5b03840664689a476567314a74,
         type: 3}
+    - target: {fileID: 2374282311330798378, guid: 2d5797b54e3aa8b488c92b4fee32b684,
+        type: 3}
+      propertyPath: shieldPref
+      value: 
+      objectReference: {fileID: 6966698505029890328, guid: 6689071703a74e34bbbe17584dd59057,
+        type: 3}
     - target: {fileID: 2374282311330798382, guid: 2d5797b54e3aa8b488c92b4fee32b684,
         type: 3}
       propertyPath: m_Name
