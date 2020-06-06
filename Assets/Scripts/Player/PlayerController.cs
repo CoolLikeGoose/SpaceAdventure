@@ -1,4 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using System.Linq;
+using System.Xml.Serialization;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -7,13 +10,14 @@ using UnityEngine.EventSystems;
 /// </summary>
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private int skinIndex;
+    //[SerializeField] private int skinIndex;
 
-    //[SerializeField] private GameObject[] weapons = null;
+    public static PlayerController Instance { get; private set; }
+
     [SerializeField] private float smoothFactor = 7f;
 
     private GameObject[] weapons;
-    [SerializeField] private GameObject[] shieldsPrefs;
+    private GameObject[] shieldsPrefs;
 
     private int curWeaponIndex = 0;
     private int bulletsLeft = 0;
@@ -21,15 +25,21 @@ public class PlayerController : MonoBehaviour
     private int curShieldIndex = -1;
     private GameObject curShield = null;
 
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     private void Start()
     {
         weapons = GameController.Instance.weapons;
+        shieldsPrefs = GameController.Instance.shieldsPrefs;
         StartCoroutine(WeaponShoot());
     }
 
     private void Update()
     {
-        if (Input.GetMouseButton(0) && !EventSystem.current.IsPointerOverGameObject(0))
+        if (Input.GetMouseButton(0) && !EventSystem.current.IsPointerOverGameObject(0) && !EventSystem.current.IsPointerOverGameObject())
         {
             Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             pos = new Vector2(pos.x, pos.y + 1f);
@@ -59,7 +69,7 @@ public class PlayerController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "laser" || collision.tag == "GameController") { return; }
-        else if (collision.tag == "shield")
+        else if (collision.tag == "shield" && curShieldIndex != 3)
         {
             Destroy(collision.gameObject);
             OnShieldUp();
@@ -87,6 +97,7 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
+        if (curShieldIndex == 3) { return; }
         if (curShieldIndex != -1)
         {
             AsteroidController asteroid = collision.gameObject.GetComponent<AsteroidController>();
@@ -100,6 +111,8 @@ public class PlayerController : MonoBehaviour
                 enemy.DestroyEnemy();
             }
             OnShieldDown();
+
+            Handheld.Vibrate();
             return;
         }
 
@@ -141,5 +154,27 @@ public class PlayerController : MonoBehaviour
 
             curShield = shield;
         }
+    }
+
+    public void SuperShieldActivate()
+    {
+        if (curShield != null) { Destroy(curShield.gameObject); }
+
+        curShieldIndex = 3;
+        GameObject shield = Instantiate(shieldsPrefs[curShieldIndex], transform.position, Quaternion.identity);
+        shield.transform.SetParent(gameObject.transform);
+
+        curShield = shield;
+
+        StartCoroutine(SuperShieldDown());
+    }
+
+    private IEnumerator SuperShieldDown()
+    {
+        yield return new WaitForSeconds(10f);
+
+        Destroy(curShield.gameObject);
+
+        curShieldIndex = -1;
     }
 }   

@@ -18,6 +18,7 @@ public class GameController : MonoBehaviour
     public float playerShootDelay = .25f;
     public float playerLaserSpeed = .2f;
     public GameObject[] weapons = null;
+    public GameObject[] shieldsPrefs;
 
     public GameObject asteroidExplosion;
     public GameObject asteroidHitParticles;

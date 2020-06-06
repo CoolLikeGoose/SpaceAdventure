@@ -47,6 +47,7 @@ MonoBehaviour:
   main: {fileID: 0}
   settings: {fileID: 0}
   shop: {fileID: 0}
+  info: {fileID: 0}
   unMuteIcon: {fileID: 21300000, guid: 5b8ff9c11c64e384aa1743f7677711bb, type: 3}
   muteIcon: {fileID: 21300000, guid: ae7e4a4bcfe7aa44daa9a42020f1ca7d, type: 3}
   ObjFXmuteIcon: {fileID: 0}
@@ -55,6 +56,7 @@ MonoBehaviour:
   scoreLabel: {fileID: 0}
   coinsLabel: {fileID: 0}
   finalScoreLabel: {fileID: 0}
+  reloadSprite: {fileID: 0}
 --- !u!114 &2374282311330798378
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74,11 +76,13 @@ MonoBehaviour:
   playerShootDelay: 0.4
   playerLaserSpeed: 15
   weapons: []
+  shieldsPrefs: []
   asteroidExplosion: {fileID: 7426280398771572463, guid: e77b1d70cd8c06f46afc52b482707475,
     type: 3}
   asteroidHitParticles: {fileID: 1211364950483344225, guid: 85666023a1254cc468aa95ec6a7f8523,
     type: 3}
   enemyLoot: []
   coinPref: {fileID: 0}
+  shieldPref: {fileID: 0}
   speedUpFactor: 0.0001
   activeShip: {fileID: 0}

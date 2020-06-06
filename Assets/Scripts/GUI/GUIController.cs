@@ -33,6 +33,11 @@ public class GUIController : MonoBehaviour
     [SerializeField] private Text coinsLabel = null;
     [SerializeField] private Text finalScoreLabel = null;
 
+    [SerializeField] private Image reloadSprite = null;
+
+    // TODO: create another class for this
+    private bool isAbilityActivated;
+
     //some properties for update GUI
     public int gameOver
     {
@@ -103,6 +108,35 @@ public class GUIController : MonoBehaviour
     public void OnDeleteSkinsBtn()
     {
         ShopController.Instance.OnDeleteSkins();
+    }
+
+    //ship
+    public void OnSuperAbility()
+    {
+        if (!isAbilityActivated) { StartCoroutine(ReloadSuperAbility()); }
+    }
+
+    private IEnumerator ReloadSuperAbility()
+    {
+        PlayerController.Instance.SuperShieldActivate();
+
+        float nowTime = Time.time;
+        reloadSprite.fillAmount = 0;
+        isAbilityActivated = true;
+
+        reloadSprite.color = new Color(255, 255, 255);
+
+        while (reloadSprite.fillAmount < 1)
+        {
+            reloadSprite.fillAmount += 0.005f;
+            yield return new WaitForSeconds(0.05f);
+            Debug.Log("reload");
+        }
+        isAbilityActivated = false;
+
+        reloadSprite.color = new Color(255, 255, 0);
+
+        Debug.Log(Time.time - nowTime);
     }
 
     public void OnChangeInterfaceBtn(string window)
