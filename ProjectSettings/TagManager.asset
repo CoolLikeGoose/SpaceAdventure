@@ -8,6 +8,7 @@ TagManager:
   - capsule
   - coin
   - shield
+  - button
   layers:
   - Default
   - TransparentFX

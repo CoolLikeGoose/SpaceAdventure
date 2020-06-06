@@ -90,6 +90,7 @@ public class GameController : MonoBehaviour
         else
         {
             Instantiate(ShopController.Instance.shipSkins[PlayerPrefs.GetInt("activeShipSkin", 0)], new Vector2(0, -3), Quaternion.identity);
+            GUIController.Instance.OnSuperAbility(true);
         }
 
         //mute FX/music if you muted them before

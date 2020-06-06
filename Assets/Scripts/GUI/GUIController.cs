@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Schema;
 using System.Xml.Serialization;
@@ -36,7 +37,7 @@ public class GUIController : MonoBehaviour
     [SerializeField] private Image reloadSprite = null;
 
     // TODO: create another class for this
-    private bool isAbilityActivated;
+    [NonSerialized] public bool isAbilityActivated;
 
     //some properties for update GUI
     public int gameOver
@@ -110,17 +111,16 @@ public class GUIController : MonoBehaviour
         ShopController.Instance.OnDeleteSkins();
     }
 
-    //ship
-    public void OnSuperAbility()
+    //ship superAbility
+    public void OnSuperAbility(bool isStartup)
     {
-        if (!isAbilityActivated) { StartCoroutine(ReloadSuperAbility()); }
+        if (!isAbilityActivated) { StartCoroutine(ReloadSuperAbility(isStartup)); }
     }
 
-    private IEnumerator ReloadSuperAbility()
+    private IEnumerator ReloadSuperAbility( bool isStartup)
     {
-        PlayerController.Instance.SuperShieldActivate();
+        if (!isStartup) { PlayerController.Instance.SuperShieldActivate(); }
 
-        float nowTime = Time.time;
         reloadSprite.fillAmount = 0;
         isAbilityActivated = true;
 
@@ -128,15 +128,14 @@ public class GUIController : MonoBehaviour
 
         while (reloadSprite.fillAmount < 1)
         {
-            reloadSprite.fillAmount += 0.005f;
+            //reload ~50s
+            reloadSprite.fillAmount += 0.005f / 5f;
             yield return new WaitForSeconds(0.05f);
             Debug.Log("reload");
         }
         isAbilityActivated = false;
 
         reloadSprite.color = new Color(255, 255, 0);
-
-        Debug.Log(Time.time - nowTime);
     }
 
     public void OnChangeInterfaceBtn(string window)

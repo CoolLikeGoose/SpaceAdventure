@@ -2190,7 +2190,7 @@ GameObject:
   - component: {fileID: 1655319244}
   m_Layer: 5
   m_Name: AbilityBtn
-  m_TagString: Untagged
+  m_TagString: button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2259,7 +2259,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1244026381}
         m_MethodName: OnSuperAbility
-        m_Mode: 1
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

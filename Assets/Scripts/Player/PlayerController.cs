@@ -39,9 +39,11 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButton(0) && !EventSystem.current.IsPointerOverGameObject(0) && !EventSystem.current.IsPointerOverGameObject())
+        // TODO: fix this (ship stuck in ability btn)
+        Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        if (Input.GetMouseButton(0) && (!EventSystem.current.IsPointerOverGameObject(0) && !EventSystem.current.IsPointerOverGameObject() || 
+            (pos.y < -3 && GUIController.Instance.isAbilityActivated)))
         {
-            Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             pos = new Vector2(pos.x, pos.y + 1f);
             transform.position = Vector2.Lerp(transform.position, pos, smoothFactor * Time.deltaTime);
         }
