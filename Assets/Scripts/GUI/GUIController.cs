@@ -44,7 +44,7 @@ public class GUIController : MonoBehaviour
     {
         set
         {
-            //main.SetActive(false);
+            main.SetActive(false);
             gameOverPopup.SetActive(true);
             finalScoreLabel.text = $"SCORE: {value}";
         }
