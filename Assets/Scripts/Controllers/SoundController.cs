@@ -14,7 +14,6 @@ public class SoundController : MonoBehaviour
 
     [SerializeField] private AudioClip enemyExplosion = null;
     [SerializeField] private AudioClip playerExplosion = null;
-    [SerializeField] private AudioClip asteroidHit = null;
 
     [SerializeField] private AudioClip playerLaser = null;
     [SerializeField] private AudioClip enemyLaser = null;
@@ -22,6 +21,9 @@ public class SoundController : MonoBehaviour
     [SerializeField] private AudioClip coinSound = null;
     [SerializeField] private AudioClip gunSound = null;
     [SerializeField] private AudioClip bonusSound = null;
+
+    [SerializeField] private AudioClip shieldUp = null;
+    [SerializeField] private AudioClip shieldDown = null;
 
     /// <summary>
     /// Property for mute music
@@ -65,11 +67,6 @@ public class SoundController : MonoBehaviour
         fXsource.PlayOneShot(playerExplosion);
     }
 
-    public void AsteroidHit()
-    {
-        fXsource.PlayOneShot(asteroidHit);
-    }
-
     public void CoinCollected()
     {
         fXsource.PlayOneShot(coinSound);
@@ -78,6 +75,12 @@ public class SoundController : MonoBehaviour
     public void GearUp()
     {
         fXsource.PlayOneShot(gunSound);
+    }
+
+    public void Shield(bool isUp)
+    {
+        if (isUp) { fXsource.PlayOneShot(shieldUp); }
+        else { fXsource.PlayOneShot(shieldDown); }
     }
 
     /// <summary>

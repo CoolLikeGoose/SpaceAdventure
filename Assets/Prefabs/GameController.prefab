@@ -57,6 +57,10 @@ MonoBehaviour:
   coinsLabel: {fileID: 0}
   finalScoreLabel: {fileID: 0}
   reloadSprite: {fileID: 0}
+  reloadSpriteBackground: {fileID: 0}
+  reloadSpriteDrones: {fileID: 0}
+  reloadSpriteShield: {fileID: 0}
+  reloadSpriteBoost: {fileID: 0}
 --- !u!114 &2374282311330798378
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -77,6 +81,7 @@ MonoBehaviour:
   playerLaserSpeed: 15
   weapons: []
   shieldsPrefs: []
+  dronePref: {fileID: 0}
   asteroidExplosion: {fileID: 7426280398771572463, guid: e77b1d70cd8c06f46afc52b482707475,
     type: 3}
   asteroidHitParticles: {fileID: 1211364950483344225, guid: 85666023a1254cc468aa95ec6a7f8523,
@@ -84,5 +89,5 @@ MonoBehaviour:
   enemyLoot: []
   coinPref: {fileID: 0}
   shieldPref: {fileID: 0}
-  speedUpFactor: 0.0001
+  speedUpFactor: 0.0005
   activeShip: {fileID: 0}

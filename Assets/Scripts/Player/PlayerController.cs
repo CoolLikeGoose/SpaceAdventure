@@ -52,7 +52,7 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator WeaponShoot()
     {
-        if (curWeaponIndex != 6)
+        if (curWeaponIndex != 6 && curWeaponIndex != 7)
         {
             if (bulletsLeft <= 0) { curWeaponIndex = 0; }
             else { bulletsLeft--; }
@@ -60,7 +60,6 @@ public class PlayerController : MonoBehaviour
 
         SoundController.Instance.LaserShot(0);
 
-        Debug.Log(curWeaponIndex);
         Instantiate(weapons[curWeaponIndex], new Vector2(transform.position.x, transform.position.y + .2f), Quaternion.identity);
 
         if (GameController.Instance.isGameActive)
@@ -81,6 +80,7 @@ public class PlayerController : MonoBehaviour
             OnShieldUp();
             return;
         }
+        else if (collision.tag == "capsule" && (curWeaponIndex == 6 || curWeaponIndex == 7)) { return; }
         else if (collision.tag == "capsule")
         {
             CapsuleMov data = collision.gameObject.GetComponent<CapsuleMov>();
@@ -141,6 +141,8 @@ public class PlayerController : MonoBehaviour
         shield.transform.SetParent(gameObject.transform);
 
         curShield = shield;
+
+        SoundController.Instance.Shield(true);
     }
 
     public void OnShieldDown()
@@ -156,5 +158,7 @@ public class PlayerController : MonoBehaviour
 
             curShield = shield;
         }
+
+        SoundController.Instance.Shield(false);
     }
 }   

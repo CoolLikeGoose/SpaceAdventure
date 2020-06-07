@@ -155,8 +155,8 @@ public class GUIController : MonoBehaviour
         while (reloadSprite.fillAmount < 1)
         {
             //reload ~50s
-            reloadSprite.fillAmount += 0.005f;
-            yield return new WaitForSeconds(0.05f);
+            reloadSprite.fillAmount += 0.001f / 5f;
+            yield return new WaitForSeconds(0.01f);
         }
         isAbilityActivated = false;
 

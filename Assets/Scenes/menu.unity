@@ -795,12 +795,13 @@ MonoBehaviour:
   musicSource: {fileID: 119703025}
   enemyExplosion: {fileID: 8300000, guid: 2cce612b16b143d4797b849e5a9320c6, type: 3}
   playerExplosion: {fileID: 8300000, guid: 943d0d106f55e204db51ce83ea8d5b67, type: 3}
-  asteroidHit: {fileID: 8300000, guid: 2b45af2d3fea9e74f9fab692d17d5f16, type: 3}
   playerLaser: {fileID: 8300000, guid: b09674c1516dce540977b73cb0d69236, type: 3}
   enemyLaser: {fileID: 8300000, guid: 8fa260b5b7c73bf46a4f55914b9225cf, type: 3}
   coinSound: {fileID: 8300000, guid: 5c25cecdd1675a74694db9491137dcde, type: 3}
   gunSound: {fileID: 8300000, guid: e860b03e678274f4e81393aa77a2c61f, type: 3}
   bonusSound: {fileID: 8300000, guid: 522abe9c41114b048b2e3ac3e989f555, type: 3}
+  shieldUp: {fileID: 8300000, guid: c5ce7f3a1f3bdd84084f33141c990679, type: 3}
+  shieldDown: {fileID: 8300000, guid: 390e37218f737924ca6c64f66a93b908, type: 3}
 --- !u!4 &119703028
 Transform:
   m_ObjectHideFlags: 0
@@ -3587,7 +3588,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 20
+  m_Text: 40
 --- !u!222 &786270580
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4078,7 +4079,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 10
+  m_Text: 20
 --- !u!222 &905907882
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4476,7 +4477,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 20
+  m_Text: 40
 --- !u!222 &985133704
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5013,7 +5014,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 5
+  m_Text: 10
 --- !u!222 &1110261508
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5735,7 +5736,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 20
+  m_Text: 40
 --- !u!222 &1456315845
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6022,7 +6023,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 10
+  m_Text: 15
 --- !u!222 &1492315810
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6642,7 +6643,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 10
+  m_Text: 15
 --- !u!222 &1652016255
 CanvasRenderer:
   m_ObjectHideFlags: 0

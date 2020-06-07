@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 /// <summary>
 /// Manages player super ability
@@ -44,11 +45,16 @@ public class SuperAbilityController : MonoBehaviour
     {
         GameObject drone = Instantiate(GameController.Instance.dronePref, transform.position, Quaternion.identity);
         drone.transform.SetParent(gameObject.transform);
+
+        weaponIndex = player.curWeaponIndex;
+        player.curWeaponIndex = 7;    
     }
 
     private void DeactivateDrones()
     {
         Destroy(transform.GetComponentInChildren<DroneController>().gameObject.transform.parent.gameObject);
+
+        player.curWeaponIndex = weaponIndex;
     }
 
     //shields

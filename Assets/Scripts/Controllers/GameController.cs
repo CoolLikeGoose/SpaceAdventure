@@ -30,7 +30,7 @@ public class GameController : MonoBehaviour
     public GameObject shieldPref;
 
     //Game speedup during the game
-    [SerializeField] private float speedUpFactor = 1;
+    [SerializeField] private float speedUpFactor = 0.0005f;
     [NonSerialized] public float gameSpeed = 1;
 
     //
