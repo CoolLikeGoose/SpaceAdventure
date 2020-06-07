@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
 /// Manages player super ability
@@ -14,6 +12,8 @@ public class SuperAbilityController : MonoBehaviour
     [Tooltip("0 - drones, 1 - shield, 2 - fastShooting")]
     [SerializeField] private int abilityType;
 
+    private int weaponIndex;
+
     private void Awake()
     {
         Instance = this;
@@ -21,27 +21,38 @@ public class SuperAbilityController : MonoBehaviour
     private void Start()
     {
         player = PlayerController.Instance;
+        GUIController.Instance.reloadSpriteSet = abilityType;
     }
 
     public void ActivateAbility()
     {
-        if (abilityType == 0) { }
+        if (abilityType == 0) { ActivateDrones(); }
         else if (abilityType == 1) { ActivateShield(); }
-        else { }
+        else { ActivateFastShooting(); }
     }
 
     public void DeactivateAbility()
     {
-        if (abilityType == 0) { }
+        if (abilityType == 0) { DeactivateDrones(); }
         else if (abilityType == 1) { DeactivateShield(); }
-        else { }
+        else { DeactivateFastShooting(); }
     }
 
     //Drones
 
+    private void ActivateDrones()
+    {
+        GameObject drone = Instantiate(GameController.Instance.dronePref, transform.position, Quaternion.identity);
+        drone.transform.SetParent(gameObject.transform);
+    }
+
+    private void DeactivateDrones()
+    {
+        Destroy(transform.GetComponentInChildren<DroneController>().gameObject.transform.parent.gameObject);
+    }
 
     //shields
-    public void ActivateShield()
+    private void ActivateShield()
     {
         if (player.curShield != null) { Destroy(player.curShield.gameObject); }
 
@@ -52,7 +63,7 @@ public class SuperAbilityController : MonoBehaviour
         player.curShield = shield;
     }
 
-    public void DeactivateShield()
+    private void DeactivateShield()
     {
         Destroy(player.curShield.gameObject);
 
@@ -60,4 +71,18 @@ public class SuperAbilityController : MonoBehaviour
     }
 
     //fastShooting
+    private void ActivateFastShooting()
+    {
+        weaponIndex = player.curWeaponIndex;
+        player.curWeaponIndex = 6;
+        GameController.Instance.playerShootDelay /= 3;
+
+        Debug.Log(player.curWeaponIndex);
+    }
+
+    private void DeactivateFastShooting()
+    {
+        player.curWeaponIndex = weaponIndex;
+        GameController.Instance.playerShootDelay *= 3;
+    }
 }

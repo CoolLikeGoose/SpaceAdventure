@@ -34,7 +34,12 @@ public class GUIController : MonoBehaviour
     [SerializeField] private Text coinsLabel = null;
     [SerializeField] private Text finalScoreLabel = null;
 
-    [SerializeField] private Image reloadSprite = null;
+    [SerializeField] private Image reloadSprite;
+    [SerializeField] private Image reloadSpriteBackground;
+    [SerializeField] private Sprite reloadSpriteDrones = null;
+    [SerializeField] private Sprite reloadSpriteShield = null;
+    [SerializeField] private Sprite reloadSpriteBoost = null;
+
 
     // TODO: create another class for this
     [NonSerialized] public bool isAbilityActivated;
@@ -66,6 +71,28 @@ public class GUIController : MonoBehaviour
         set { coinsLabel.text = $"x {value}"; }
     }
 
+    public int reloadSpriteSet
+    {
+        set
+        {
+            if (value == 0)
+            {
+                reloadSprite.sprite = reloadSpriteDrones;
+                reloadSpriteBackground.sprite = reloadSpriteDrones;
+            }
+            else if (value == 1)
+            {
+                reloadSprite.sprite = reloadSpriteShield;
+                reloadSpriteBackground.sprite = reloadSpriteShield;
+            }
+            else
+            {
+                reloadSprite.sprite = reloadSpriteBoost;
+                reloadSpriteBackground.sprite = reloadSpriteBoost;
+            }
+        }
+    }
+
     private GameObject activeWindow;
 
  
@@ -73,6 +100,7 @@ public class GUIController : MonoBehaviour
     {
         Instance = this;
         activeWindow = main;
+        //reloadSprite.sprite = reloadSpriteDrones;
     }
 
     //Buttons methods

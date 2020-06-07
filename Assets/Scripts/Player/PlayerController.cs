@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     private GameObject[] weapons;
     [NonSerialized] public GameObject[] shieldsPrefs;
 
-    private int curWeaponIndex = 0;
+    [NonSerialized] public int curWeaponIndex = 0;
     private int bulletsLeft = 0;
 
     [NonSerialized] public int curShieldIndex = -1;
@@ -52,11 +52,15 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator WeaponShoot()
     {
-        if (bulletsLeft <= 0) { curWeaponIndex = 0; }
-        else { bulletsLeft--; }
+        if (curWeaponIndex != 6)
+        {
+            if (bulletsLeft <= 0) { curWeaponIndex = 0; }
+            else { bulletsLeft--; }
+        }
 
         SoundController.Instance.LaserShot(0);
 
+        Debug.Log(curWeaponIndex);
         Instantiate(weapons[curWeaponIndex], new Vector2(transform.position.x, transform.position.y + .2f), Quaternion.identity);
 
         if (GameController.Instance.isGameActive)

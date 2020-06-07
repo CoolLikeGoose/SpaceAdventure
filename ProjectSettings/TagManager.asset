@@ -9,6 +9,7 @@ TagManager:
   - coin
   - shield
   - button
+  - DroneLaser
   layers:
   - Default
   - TransparentFX
