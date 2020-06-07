@@ -3429,7 +3429,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Summons Allied Ships
+  m_Text: Summons two drones
 --- !u!222 &761298320
 CanvasRenderer:
   m_ObjectHideFlags: 0

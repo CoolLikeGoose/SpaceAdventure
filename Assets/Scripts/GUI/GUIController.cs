@@ -116,7 +116,6 @@ public class GUIController : MonoBehaviour
     public void OnSuperAbility()
     {
         if (!isAbilityActivated) { StartCoroutine(UsingSuperAbility()); }
-
     }
 
     public IEnumerator ReloadSuperAbility()
@@ -138,7 +137,8 @@ public class GUIController : MonoBehaviour
 
     private IEnumerator UsingSuperAbility()
     {
-        PlayerController.Instance.SuperShieldActivate();
+        //PlayerController.Instance.SuperShieldActivate();
+        SuperAbilityController.Instance.ActivateAbility();
 
         isAbilityActivated = true;
 
@@ -149,7 +149,9 @@ public class GUIController : MonoBehaviour
             yield return new WaitForSeconds(0.01f);
         }
 
-        PlayerController.Instance.SuperShieldDown();
+        //PlayerController.Instance.SuperShieldDown();
+        SuperAbilityController.Instance.DeactivateAbility();
+
         StartCoroutine(ReloadSuperAbility());
     }
 

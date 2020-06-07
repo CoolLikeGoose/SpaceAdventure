@@ -4767,6 +4767,7 @@ GameObject:
   - component: {fileID: 3882292023362513769}
   - component: {fileID: 3178943820648382261}
   - component: {fileID: 2729372877937405841}
+  - component: {fileID: 9150332170732551247}
   m_Layer: 0
   m_Name: Player6
   m_TagString: Untagged
@@ -4909,10 +4910,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cf1f5617f6a34248b4f0de8c593688a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skinIndex: 6
-  smoothFactor: 7
-  shieldsPrefs:
-  - {fileID: 1963942001608519577, guid: 67cd63b3e08db5841b96ce51cdcdc8eb, type: 3}
-  - {fileID: 5046634859975338924, guid: 6c62ebbd4cc9fc44ba4cc645c2d8c272, type: 3}
-  - {fileID: 9153784341771011980, guid: bc57ec91a421fd5448d2949c3fde7e7a, type: 3}
-  - {fileID: 9153784341771011980, guid: f04d09349ae29ea4296378cdb9c69254, type: 3}
+--- !u!114 &9150332170732551247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4559560091673667229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4ce52b0adce5454886070734c5088b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilityType: 2

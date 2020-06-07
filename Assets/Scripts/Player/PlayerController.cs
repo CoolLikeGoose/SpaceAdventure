@@ -14,16 +14,16 @@ public class PlayerController : MonoBehaviour
 
     public static PlayerController Instance { get; private set; }
 
-    [SerializeField] private float smoothFactor = 7f;
+    private float smoothFactor = 7f;
 
     private GameObject[] weapons;
-    private GameObject[] shieldsPrefs;
+    [NonSerialized] public GameObject[] shieldsPrefs;
 
     private int curWeaponIndex = 0;
     private int bulletsLeft = 0;
 
-    private int curShieldIndex = -1;
-    private GameObject curShield = null;
+    [NonSerialized] public int curShieldIndex = -1;
+    [NonSerialized] public GameObject curShield = null;
 
     private void Awake()
     {
@@ -156,23 +156,5 @@ public class PlayerController : MonoBehaviour
 
             curShield = shield;
         }
-    }
-
-    public void SuperShieldActivate()
-    {
-        if (curShield != null) { Destroy(curShield.gameObject); }
-
-        curShieldIndex = 3;
-        GameObject shield = Instantiate(shieldsPrefs[curShieldIndex], transform.position, Quaternion.identity);
-        shield.transform.SetParent(gameObject.transform);
-
-        curShield = shield;
-    }
-
-    public void SuperShieldDown()
-    {
-        Destroy(curShield.gameObject);
-
-        curShieldIndex = -1;
     }
 }   
