@@ -100,9 +100,9 @@ public class ShopController : MonoBehaviour
             shopButtons[skinIndex].transform.GetChild(1).gameObject.SetActive(true);
         }
 
-        SetDefaultSkin();
-
         DataController.DeleteFile("skins");
+
+        SetDefaultSkin();
     }
 
     private void SetDefaultSkin()
