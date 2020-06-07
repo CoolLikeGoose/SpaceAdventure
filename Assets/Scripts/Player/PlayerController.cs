@@ -103,15 +103,11 @@ public class PlayerController : MonoBehaviour
         if (curShieldIndex != -1)
         {
             AsteroidController asteroid = collision.gameObject.GetComponent<AsteroidController>();
-            if (asteroid != null)
-            {
-                asteroid.DestroyAsteroid();
-            }
             EnemyController enemy = collision.gameObject.GetComponent<EnemyController>();
-            if (enemy != null)
-            {
-                enemy.DestroyEnemy();
-            }
+            if (asteroid != null) { asteroid.DestroyAsteroid(); }
+            else if (enemy != null) { enemy.DestroyEnemy(); }
+            else { Destroy(collision.gameObject); }
+            
             OnShieldDown();
 
             Handheld.Vibrate();
