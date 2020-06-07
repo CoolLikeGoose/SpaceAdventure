@@ -167,14 +167,10 @@ public class PlayerController : MonoBehaviour
         shield.transform.SetParent(gameObject.transform);
 
         curShield = shield;
-
-        StartCoroutine(SuperShieldDown());
     }
 
-    private IEnumerator SuperShieldDown()
+    public void SuperShieldDown()
     {
-        yield return new WaitForSeconds(10f);
-
         Destroy(curShield.gameObject);
 
         curShieldIndex = -1;

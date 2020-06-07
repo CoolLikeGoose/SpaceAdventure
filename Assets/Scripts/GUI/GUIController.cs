@@ -44,6 +44,7 @@ public class GUIController : MonoBehaviour
     {
         set
         {
+            //main.SetActive(false);
             gameOverPopup.SetActive(true);
             finalScoreLabel.text = $"SCORE: {value}";
         }
@@ -112,30 +113,44 @@ public class GUIController : MonoBehaviour
     }
 
     //ship superAbility
-    public void OnSuperAbility(bool isStartup)
+    public void OnSuperAbility()
     {
-        if (!isAbilityActivated) { StartCoroutine(ReloadSuperAbility(isStartup)); }
+        if (!isAbilityActivated) { StartCoroutine(UsingSuperAbility()); }
+
     }
 
-    private IEnumerator ReloadSuperAbility( bool isStartup)
+    public IEnumerator ReloadSuperAbility()
     {
-        if (!isStartup) { PlayerController.Instance.SuperShieldActivate(); }
-
         reloadSprite.fillAmount = 0;
-        isAbilityActivated = true;
 
         reloadSprite.color = new Color(255, 255, 255);
 
         while (reloadSprite.fillAmount < 1)
         {
             //reload ~50s
-            reloadSprite.fillAmount += 0.005f / 5f;
+            reloadSprite.fillAmount += 0.005f;
             yield return new WaitForSeconds(0.05f);
-            Debug.Log("reload");
         }
         isAbilityActivated = false;
 
         reloadSprite.color = new Color(255, 255, 0);
+    }
+
+    private IEnumerator UsingSuperAbility()
+    {
+        PlayerController.Instance.SuperShieldActivate();
+
+        isAbilityActivated = true;
+
+        while (reloadSprite.fillAmount > 0)
+        {
+            //reload ~50s
+            reloadSprite.fillAmount -= 0.001f;
+            yield return new WaitForSeconds(0.01f);
+        }
+
+        PlayerController.Instance.SuperShieldDown();
+        StartCoroutine(ReloadSuperAbility());
     }
 
     public void OnChangeInterfaceBtn(string window)
