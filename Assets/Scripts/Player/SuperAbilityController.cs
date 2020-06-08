@@ -14,6 +14,7 @@ public class SuperAbilityController : MonoBehaviour
     [SerializeField] private int abilityType;
 
     private int weaponIndex;
+    private int shieldIndex;
 
     private void Awake()
     {
@@ -60,6 +61,8 @@ public class SuperAbilityController : MonoBehaviour
     //shields
     private void ActivateShield()
     {
+        shieldIndex = player.curShieldIndex;
+
         if (player.curShield != null) { Destroy(player.curShield.gameObject); }
 
         player.curShieldIndex = 3;
@@ -73,7 +76,7 @@ public class SuperAbilityController : MonoBehaviour
     {
         Destroy(player.curShield.gameObject);
 
-        player.curShieldIndex = -1;
+        player.curShieldIndex = shieldIndex;
     }
 
     //fastShooting
