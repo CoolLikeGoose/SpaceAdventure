@@ -7,11 +7,18 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     [SerializeField] private GameObject Laser = null;
+    [SerializeField] private bool canFire;
+    [SerializeField] private bool cantMoveByHimself;
+    [SerializeField] private bool haveHp;
+    [SerializeField] private bool fastMove;
 
     private float speed;
     private GameObject[] loot;
 
     private Renderer r;
+
+    private int hp = 3;
+    private int movDirect;
 
     private void Start()
     {
@@ -22,12 +29,18 @@ public class EnemyController : MonoBehaviour
 
         loot = GameController.Instance.enemyLoot;
 
-        StartCoroutine(WeaponShoot());
+        if (canFire) { StartCoroutine(WeaponShoot()); }
+        if (fastMove)
+        {
+            movDirect = Random.Range(0, 1);
+            if (movDirect == 0) { movDirect = -1; }
+        }
     }
 
     private void Update()
     {
-        transform.Translate(new Vector2(0, speed * Time.deltaTime * 1.2f * GameController.Instance.gameSpeed));
+        if (!cantMoveByHimself) { transform.Translate(new Vector2(0, speed * Time.deltaTime * 1.2f * GameController.Instance.gameSpeed)); }
+        if (fastMove) { EnemyAdditionalMovement(); }
     }
 
     private IEnumerator WeaponShoot()
@@ -51,8 +64,15 @@ public class EnemyController : MonoBehaviour
         {
             Destroy(collision.gameObject);
 
-            DestroyEnemy();
+            if (haveHp) { DamageEnemy(); }
+            else { DestroyEnemy(); }
         }
+    }
+
+    private void DamageEnemy()
+    {
+        hp -= GameController.Instance.playerDamage;
+        if (hp <= 0) { DestroyEnemy(); }
     }
 
     public void DestroyEnemy()
@@ -60,14 +80,26 @@ public class EnemyController : MonoBehaviour
         GameController.Instance.score++;
 
         //explosion
-        Instantiate(GameController.Instance.asteroidExplosion, transform.position, Quaternion.identity);
+        GameObject explosion = Instantiate(GameController.Instance.asteroidExplosion, transform.position, Quaternion.identity);
+        if (cantMoveByHimself) { explosion.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f); }
 
-        //loot
-        if (Random.Range(0, 100) < 25) { Instantiate(loot[Random.Range(0, loot.Length)], transform.position, Quaternion.identity); }
+        //loot if enemy != enemySmall
+        else { if (Random.Range(0, 100) < 25) { Instantiate(loot[Random.Range(0, loot.Length)], transform.position, Quaternion.identity); } }
 
         //sound
         if (r.isVisible) { SoundController.Instance.EnemyExplosion(); }
 
         Destroy(gameObject);
+    }
+
+    private void EnemyAdditionalMovement()
+    {
+        if ((movDirect == -1 && transform.position.x > 2.2f) || (movDirect == 1 && transform.position.x < -2.2f))
+        {
+            movDirect *= -1;
+            Debug.Log("Change");
+        }
+
+        transform.Translate(new Vector2(speed * Time.deltaTime * movDirect, 0));
     }
 }

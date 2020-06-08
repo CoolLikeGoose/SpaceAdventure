@@ -8,8 +8,8 @@ using UnityEngine;
 public class EnemyGenerator : MonoBehaviour
 {
     //contains enemy prefabs
-    [SerializeField] private GameObject asteroidPref = null;
-    [SerializeField] private GameObject enemyPref = null;
+    [Tooltip("Asteroid - 0; Standard - 1, ")]
+    [SerializeField] private GameObject[] enemyPrefs = null;
 
     private void Start()
     {
@@ -18,11 +18,12 @@ public class EnemyGenerator : MonoBehaviour
 
     private IEnumerator SpawnAsteroid()
     {
-        GameObject toSpawn = asteroidPref;
+        GameObject toSpawn = enemyPrefs[0];
 
-        if (Random.Range(0, 100) < 20) { toSpawn = enemyPref; }
+        //20% to spawn enemy instead of asteroid
+        if (Random.Range(0, 100) < 20) { toSpawn = enemyPrefs[Random.Range(1, enemyPrefs.Length)]; }
 
-        Vector2 spawnPos = new Vector2(Random.Range(-2.4f, 2.4f), transform.position.y);
+        Vector2 spawnPos = new Vector2(Random.Range(-2.3f, 2.3f), transform.position.y);
         Instantiate(toSpawn, spawnPos, Quaternion.identity);
 
         if (GameController.Instance.isGameActive)

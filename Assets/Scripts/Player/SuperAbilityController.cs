@@ -82,8 +82,6 @@ public class SuperAbilityController : MonoBehaviour
         weaponIndex = player.curWeaponIndex;
         player.curWeaponIndex = 6;
         GameController.Instance.playerShootDelay /= 3;
-
-        Debug.Log(player.curWeaponIndex);
     }
 
     private void DeactivateFastShooting()

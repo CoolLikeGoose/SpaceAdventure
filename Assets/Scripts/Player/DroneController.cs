@@ -15,11 +15,8 @@ public class DroneController : MonoBehaviour
 
         Instantiate(GameController.Instance.weapons[4], new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
 
-        if (GameController.Instance.isGameActive)
-        {
-            yield return new WaitForSeconds(GameController.Instance.playerShootDelay);
-            StartCoroutine(WeaponShoot());
-        }
+        yield return new WaitForSeconds(GameController.Instance.playerShootDelay);
+        StartCoroutine(WeaponShoot());
 
         yield return null;
     }

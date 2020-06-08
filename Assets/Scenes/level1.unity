@@ -557,10 +557,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f33adaa3068eb9e4b85b9dab1fa49e82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  asteroidPref: {fileID: 2985233921142733749, guid: 11d80084754a94945aa9eeb3f2a574d8,
-    type: 3}
-  enemyPref: {fileID: 1247599464208105238, guid: d4bad2610403c5843885690f64181f5f,
-    type: 3}
+  enemyPrefs:
+  - {fileID: 2985233921142733749, guid: 11d80084754a94945aa9eeb3f2a574d8, type: 3}
+  - {fileID: 1247599464208105238, guid: d4bad2610403c5843885690f64181f5f, type: 3}
+  - {fileID: 2313902906555983891, guid: 332eb1a06c730ef48aa73582094c4b75, type: 3}
+  - {fileID: 2313902906555983891, guid: ce40c9600c364f9479e2de031dbb818b, type: 3}
+  - {fileID: 2313902906555983891, guid: 7618a19fea094d347822cd65964b22fb, type: 3}
 --- !u!4 &595380571
 Transform:
   m_ObjectHideFlags: 0

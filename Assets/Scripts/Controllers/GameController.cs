@@ -30,7 +30,7 @@ public class GameController : MonoBehaviour
     public GameObject shieldPref;
 
     //Game speedup during the game
-    [SerializeField] private float speedUpFactor = 0.0005f;
+    [SerializeField] private float speedUpFactor = 0.0001f;
     [NonSerialized] public float gameSpeed = 1;
 
     //
@@ -105,7 +105,7 @@ public class GameController : MonoBehaviour
     private void Update()
     {
         //speedup; max speedup = 5
-        if (!nowSceneMenu && gameSpeed < 5) { gameSpeed += speedUpFactor; }
+        if (!nowSceneMenu && gameSpeed < 3) { gameSpeed += speedUpFactor; }
     }
 
     //needs to call coroutine 

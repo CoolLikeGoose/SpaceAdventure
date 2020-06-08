@@ -89,5 +89,5 @@ MonoBehaviour:
   enemyLoot: []
   coinPref: {fileID: 0}
   shieldPref: {fileID: 0}
-  speedUpFactor: 0.0005
+  speedUpFactor: 0.0001
   activeShip: {fileID: 0}

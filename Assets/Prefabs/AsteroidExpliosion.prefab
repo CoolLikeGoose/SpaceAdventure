@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2491039178819772132}
   - component: {fileID: 50699370299527286}
   m_Layer: 0
-  m_Name: Particle System
+  m_Name: AsteroidExpliosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

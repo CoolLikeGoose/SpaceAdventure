@@ -62,11 +62,8 @@ public class PlayerController : MonoBehaviour
 
         Instantiate(weapons[curWeaponIndex], new Vector2(transform.position.x, transform.position.y + .2f), Quaternion.identity);
 
-        if (GameController.Instance.isGameActive)
-        {
-            yield return new WaitForSeconds(GameController.Instance.playerShootDelay);
-            StartCoroutine(WeaponShoot());
-        }
+        yield return new WaitForSeconds(GameController.Instance.playerShootDelay);
+        StartCoroutine(WeaponShoot());
 
         yield return null;
     }
