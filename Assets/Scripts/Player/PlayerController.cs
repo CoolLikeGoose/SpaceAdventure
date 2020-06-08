@@ -120,7 +120,7 @@ public class PlayerController : MonoBehaviour
         Destroy(collision.gameObject);
 
         //explosion
-        Instantiate(GameController.Instance.asteroidExplosion, transform.position, Quaternion.identity);
+        Instantiate(GameController.Instance.shipExplosion, transform.position, Quaternion.identity);
 
         //sound
         SoundController.Instance.PlayerExplosion();

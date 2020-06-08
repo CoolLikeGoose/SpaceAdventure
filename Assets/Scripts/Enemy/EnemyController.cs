@@ -80,7 +80,7 @@ public class EnemyController : MonoBehaviour
         GameController.Instance.score++;
 
         //explosion
-        GameObject explosion = Instantiate(GameController.Instance.asteroidExplosion, transform.position, Quaternion.identity);
+        GameObject explosion = Instantiate(GameController.Instance.shipExplosion, transform.position, Quaternion.identity);
         if (cantMoveByHimself) { explosion.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f); }
 
         //loot if enemy != enemySmall

@@ -21,6 +21,7 @@ public class GameController : MonoBehaviour
     public GameObject[] shieldsPrefs;
     public GameObject dronePref;
 
+    public GameObject shipExplosion;
     public GameObject asteroidExplosion;
     public GameObject asteroidHitParticles;
 
