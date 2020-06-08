@@ -1907,6 +1907,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7426280398771572463, guid: e77b1d70cd8c06f46afc52b482707475,
         type: 3}
+    - target: {fileID: 2374282311330798378, guid: 2d5797b54e3aa8b488c92b4fee32b684,
+        type: 3}
+      propertyPath: shipHitParticles
+      value: 
+      objectReference: {fileID: 7159135689488761927, guid: ec38d78ac485fde40a83d0a44e619f02,
+        type: 3}
     - target: {fileID: 2374282311330798382, guid: 2d5797b54e3aa8b488c92b4fee32b684,
         type: 3}
       propertyPath: m_Name

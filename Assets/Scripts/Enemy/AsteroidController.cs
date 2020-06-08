@@ -9,6 +9,7 @@ public class AsteroidController : MonoBehaviour
     private Transform child;
 
     private float randomRotation;
+    float randomScale;
 
     private GameObject explosion;
     private GameObject damage;
@@ -28,7 +29,7 @@ public class AsteroidController : MonoBehaviour
         speed = GameController.Instance.EnemySpeed;
         child = transform.GetChild(0);
 
-        float randomScale = Random.Range(0.7f, 1.3f);
+        randomScale = Random.Range(0.7f, 1.3f);
         transform.localScale = new Vector3(randomScale, randomScale, randomScale);
 
         //hp depends from scale
@@ -78,7 +79,9 @@ public class AsteroidController : MonoBehaviour
         GameController.Instance.score++;
 
         //explosion
-        Instantiate(explosion, transform.position, Quaternion.identity);
+        GameObject explosionFX = Instantiate(explosion, transform.position, Quaternion.identity);
+        explosionFX.transform.localScale = new Vector3(randomScale, randomScale, randomScale);
+
 
         //loot
         if (Random.Range(0, 100) < 30) { Instantiate(GameController.Instance.coinPref, transform.position, Quaternion.identity); }

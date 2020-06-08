@@ -14,6 +14,7 @@ public class EnemyController : MonoBehaviour
 
     private float speed;
     private GameObject[] loot;
+    private GameObject damage;
 
     private Renderer r;
 
@@ -28,6 +29,8 @@ public class EnemyController : MonoBehaviour
         speed = GameController.Instance.EnemySpeed;
 
         loot = GameController.Instance.enemyLoot;
+
+        damage = GameController.Instance.shipHitParticles;
 
         if (canFire) { StartCoroutine(WeaponShoot()); }
         if (fastMove)
@@ -73,6 +76,8 @@ public class EnemyController : MonoBehaviour
     {
         hp -= GameController.Instance.playerDamage;
         if (hp <= 0) { DestroyEnemy(); }
+
+        Instantiate(damage, transform.position, Quaternion.identity);
     }
 
     public void DestroyEnemy()
