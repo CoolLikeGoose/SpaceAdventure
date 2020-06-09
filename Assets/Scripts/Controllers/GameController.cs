@@ -35,6 +35,9 @@ public class GameController : MonoBehaviour
     [SerializeField] private float speedUpFactor = 0.0001f;
     [NonSerialized] public float gameSpeed = 1;
 
+    //boss
+    [SerializeField] private GameObject boss;
+
     //
     [NonSerialized] public bool isGameActive = true;
 
@@ -48,13 +51,24 @@ public class GameController : MonoBehaviour
             {
                 _score = value;
                 GUIController.Instance.gameScoreSet = _score;
+
+                if (score == 5) { Instantiate(boss, new Vector2(0, 8), Quaternion.identity); }
             }
 
         }
     }
     private int _score = 0;
     [NonSerialized] public int maxScore;
-    [NonSerialized] public int coins = 0;
+    private int coinsValue = 0;
+    public int coins
+    {
+        get { return coinsValue; }
+        set
+        {
+            coinsValue = value;
+            GUIController.Instance.coinSet = coins;
+        }
+    }
 
     //music DELETE
     [NonSerialized] public bool fxMuted = false;
@@ -77,7 +91,6 @@ public class GameController : MonoBehaviour
         Instance = this;
 
         maxScore = DataController.LoadFile("score");
-        coins = DataController.LoadFile("coins");
 
         playerDamage = PlayerPrefs.GetInt("playerDamage", 1);
     }
@@ -101,6 +114,7 @@ public class GameController : MonoBehaviour
         //mute FX/music if you muted them before
         GUIController.Instance.OnFXMute(PlayerPrefs.GetInt("fxMuted"));
         GUIController.Instance.OnMusicMute(PlayerPrefs.GetInt("musicMuted"));
+        coins = DataController.LoadFile("coins");
 
     }
 

@@ -68,7 +68,11 @@ public class GUIController : MonoBehaviour
     }
     public int coinSet
     {
-        set { coinsLabel.text = $"x {value}"; }
+        set
+        {
+            if (GameController.Instance.nowSceneMenu) { coinsLabel.text = $"x {value}"; }
+            else { coinsLabel.text = value.ToString(); }
+        }
     }
 
     public int reloadSpriteSet
@@ -154,8 +158,8 @@ public class GUIController : MonoBehaviour
 
         while (reloadSprite.fillAmount < 1)
         {
-            //reload ~50s
-            reloadSprite.fillAmount += 0.001f / 5f;
+            //reload ~40s
+            reloadSprite.fillAmount += 0.001f / 3f;
             yield return new WaitForSeconds(0.01f);
         }
         isAbilityActivated = false;
@@ -172,7 +176,7 @@ public class GUIController : MonoBehaviour
 
         while (reloadSprite.fillAmount > 0)
         {
-            //reload ~50s
+            //using ~10s
             reloadSprite.fillAmount -= 0.001f;
             yield return new WaitForSeconds(0.01f);
         }
