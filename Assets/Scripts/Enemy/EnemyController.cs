@@ -52,13 +52,8 @@ public class EnemyController : MonoBehaviour
         
         Instantiate(Laser, new Vector2(transform.position.x, transform.position.y - .6f), Quaternion.identity);
 
-        if (GameController.Instance.isGameActive)
-        {
-            yield return new WaitForSeconds(GameController.Instance.enemyShootDelay/GameController.Instance.gameSpeed);
-            StartCoroutine(WeaponShoot());
-        }
-
-        yield return null;
+        yield return new WaitForSeconds(GameController.Instance.enemyShootDelay/GameController.Instance.gameSpeed);
+        StartCoroutine(WeaponShoot());
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -102,7 +97,6 @@ public class EnemyController : MonoBehaviour
         if ((movDirect == -1 && transform.position.x > 2.2f) || (movDirect == 1 && transform.position.x < -2.2f))
         {
             movDirect *= -1;
-            Debug.Log("Change");
         }
 
         transform.Translate(new Vector2(speed * Time.deltaTime * movDirect, 0));

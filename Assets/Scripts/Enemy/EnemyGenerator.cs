@@ -13,11 +13,13 @@ public class EnemyGenerator : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(SpawnAsteroid());
+        StartCoroutine(SpawnEnemy());
     }
 
-    private IEnumerator SpawnAsteroid()
+    private IEnumerator SpawnEnemy()
     {
+        if (!GameController.Instance.isGameActive) { yield return new WaitUntil(() => GameController.Instance.isGameActive); }
+
         GameObject toSpawn = enemyPrefs[0];
 
         //20% to spawn enemy instead of asteroid
@@ -29,7 +31,7 @@ public class EnemyGenerator : MonoBehaviour
         if (GameController.Instance.isGameActive)
         {
             yield return new WaitForSeconds(GameController.Instance.enemySpawnDelay);
-            StartCoroutine(SpawnAsteroid());
+            StartCoroutine(SpawnEnemy());
         }
 
         yield return null;
