@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Linq;
-using System.Xml.Serialization;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -52,6 +50,8 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator WeaponShoot()
     {
+        if (BossController.Instance != null && !BossController.Instance.isFighting) { yield return new WaitUntil(() => BossController.Instance.isFighting); }
+
         if (curWeaponIndex != 6 && curWeaponIndex != 7)
         {
             if (bulletsLeft <= 0) { curWeaponIndex = 0; }
@@ -64,8 +64,6 @@ public class PlayerController : MonoBehaviour
 
         yield return new WaitForSeconds(GameController.Instance.playerShootDelay);
         StartCoroutine(WeaponShoot());
-
-        yield return null;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

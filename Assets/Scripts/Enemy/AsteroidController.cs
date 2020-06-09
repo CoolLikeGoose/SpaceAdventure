@@ -83,10 +83,10 @@ public class AsteroidController : MonoBehaviour
         explosionFX.transform.localScale = new Vector3(randomScale, randomScale, randomScale);
 
 
-        //loot
-        if (Random.Range(0, 100) < 30) { Instantiate(GameController.Instance.coinPref, transform.position, Quaternion.identity); }
+        //loot 25%
+        if (Random.Range(0, 100) < 20) { Instantiate(GameController.Instance.coinPref, transform.position, Quaternion.identity); }
         //chance (70*7) ~ 5%
-        else if (Random.Range(0, 100) < 7) { Instantiate(GameController.Instance.shieldPref, transform.position, Quaternion.identity); }
+        else if (Random.Range(0, 100) < 6) { Instantiate(GameController.Instance.shieldPref, transform.position, Quaternion.identity); }
 
         //sound
         if (r.isVisible) { SoundController.Instance.EnemyExplosion(); }
