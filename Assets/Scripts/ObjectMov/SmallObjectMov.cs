@@ -9,6 +9,7 @@ public class SmallObjectMov : MonoBehaviour
     [SerializeField] private int sender = 0;
     [SerializeField] private bool hasChilds = false;
     [SerializeField] private bool isAbilityLaser = false;
+    [SerializeField] private float speedUp = 1;
 
     private float speed;
 
@@ -20,7 +21,7 @@ public class SmallObjectMov : MonoBehaviour
     }
     void Update()
     {
-        transform.Translate(new Vector2(0, speed * Time.deltaTime * GameController.Instance.gameSpeed));
+        transform.Translate(new Vector2(0, speed * Time.deltaTime * GameController.Instance.gameSpeed * speedUp));
         if (isAbilityLaser) { AbilityAdditionalMovement(); }
     }
     private void LateUpdate()

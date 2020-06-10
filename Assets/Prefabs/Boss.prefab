@@ -346,6 +346,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBar: {fileID: 1460349657}
+  BossLaser: {fileID: 7826298875461831839, guid: eb62041451368c74a829bbc28653d47c,
+    type: 3}
 --- !u!60 &6771738202604821115
 PolygonCollider2D:
   m_ObjectHideFlags: 0

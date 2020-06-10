@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,11 +9,16 @@ public class BossController : MonoBehaviour
     // TODO: delete this
     public static BossController Instance { get; private set; }
 
+    //Boss mustnt take damage before firstEnter method doesnt end
     [NonSerialized] public bool isFighting = false;
 
-    private float maxHp = 10;
+    //controls the players health
+    private float maxHp = 50;
     private float hp;
     [SerializeField] private Image healthBar;
+
+    //Prefabs
+    [SerializeField] private GameObject BossLaser;
 
     private void Awake()
     {
@@ -33,6 +39,9 @@ public class BossController : MonoBehaviour
         StartCoroutine(firstEnter());
     }
 
+    /// <summary>
+    /// slow boss appearance
+    /// </summary>
     private IEnumerator firstEnter()
     {
         if (transform.position.y > 5)
@@ -47,6 +56,9 @@ public class BossController : MonoBehaviour
             //StartCoroutine(BossBattleProcess());
             isFighting = true;
             transform.position = new Vector2(0, 5);
+
+            //Phase 1
+            StartCoroutine(WeaponShoot());
         }
     }
 
@@ -55,6 +67,9 @@ public class BossController : MonoBehaviour
         return new WaitUntil(() => false);
     }
 
+    /// <summary>
+    /// Controls the correct completeion of the boss battle
+    /// </summary>
     private IEnumerator BossBattleEnd()
     {
         isFighting = false;
@@ -64,9 +79,8 @@ public class BossController : MonoBehaviour
 
         StartCoroutine(explosionFX());
         yield return new WaitForSeconds(3f);
-        //player Coroutine WeaponShoot should continue
+
         isFighting = true;
-        yield return null;
 
         GameController.Instance.isGameActive = true;
         GameController.Instance.score += 20;
@@ -74,7 +88,9 @@ public class BossController : MonoBehaviour
         Destroy(gameObject);
     }
 
-
+    /// <summary>
+    /// Creates explosion FX when boss is destroyed
+    /// </summary>
     private IEnumerator explosionFX()
     {
         Vector2 pos = new Vector2(UnityEngine.Random.Range(-1.5f, 1.5f), UnityEngine.Random.Range(3f, 5f));
@@ -84,6 +100,25 @@ public class BossController : MonoBehaviour
         StartCoroutine(explosionFX());
     }
 
+    private IEnumerator WeaponShoot()
+    {
+        Vector2 spawnLaser = new Vector2(0, 3);
+
+        if (PlayerController.Instance == null) { yield break; }
+        Vector2 targetPos = PlayerController.Instance.gameObject.transform.position; 
+        targetPos -= spawnLaser;
+        float angle = Mathf.Atan2(targetPos.y, targetPos.x) * Mathf.Rad2Deg + 90;
+        
+        Instantiate(BossLaser, spawnLaser, Quaternion.AngleAxis(angle, Vector3.forward));
+
+        yield return new WaitForSeconds(1f);
+        StartCoroutine(WeaponShoot());
+    }
+
+
+    /// <summary>
+    /// Reacts to hit from player shots
+    /// </summary>
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("laser") && isFighting)
