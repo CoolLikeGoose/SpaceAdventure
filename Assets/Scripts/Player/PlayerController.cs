@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator WeaponShoot()
     {
-        if (BossController.Instance != null && !BossController.Instance.isFighting) { yield return new WaitUntil(() => BossController.Instance.isFighting); }
+        //if (BossController.Instance != null && !BossController.Instance.isFighting) { yield return new WaitUntil(() => BossController.Instance.isFighting); }
 
         if (curWeaponIndex != 6 && curWeaponIndex != 7)
         {
@@ -68,15 +68,24 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "laser" || collision.tag == "GameController") { return; }
-        else if (collision.tag == "shield" && curShieldIndex != 3)
+        if (collision.CompareTag("laser") || collision.CompareTag("GameController")) { return; }
+        else if (collision.CompareTag("boss"))
+        {
+            GameController.Instance.GameOver("death");
+            Instantiate(GameController.Instance.shipExplosion, transform.position, Quaternion.identity);
+            SoundController.Instance.PlayerExplosion();
+            Destroy(gameObject);
+
+            return;
+        }
+        else if (collision.CompareTag("shield") && curShieldIndex != 3)
         {
             Destroy(collision.gameObject);
             OnShieldUp();
             return;
         }
-        else if (collision.tag == "capsule" && (curWeaponIndex == 6 || curWeaponIndex == 7)) { return; }
-        else if (collision.tag == "capsule")
+        else if (collision.CompareTag("capsule") && (curWeaponIndex == 6 || curWeaponIndex == 7)) { return; }
+        else if (collision.CompareTag("capsule"))
         {
             CapsuleMov data = collision.gameObject.GetComponent<CapsuleMov>();
             curWeaponIndex = data.carryWeaponIndex;
@@ -88,7 +97,7 @@ public class PlayerController : MonoBehaviour
 
             return;
         }
-        else if (collision.tag == "coin")
+        else if (collision.CompareTag("coin"))
         {
             Destroy(collision.gameObject);
             GameController.Instance.coins++;

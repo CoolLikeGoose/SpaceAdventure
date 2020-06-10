@@ -69,6 +69,7 @@ public class BossController : MonoBehaviour
         yield return null;
 
         GameController.Instance.isGameActive = true;
+        GameController.Instance.score += 20;
 
         Destroy(gameObject);
     }
