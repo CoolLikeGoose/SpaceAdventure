@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class BossDronsController : MonoBehaviour
 {
-    private int hp = 5;
+    private int hp = 8;
     private GameObject Laser;
 
     private void Start()
@@ -17,7 +17,7 @@ public class BossDronsController : MonoBehaviour
     {
         if (transform.parent.position.y > 5)
         {
-            transform.parent.Translate(new Vector2(0, -0.005f));
+            transform.parent.Translate(new Vector2(0, -1f * Time.deltaTime));
             yield return null;
             StartCoroutine(FirstEnter());
         }

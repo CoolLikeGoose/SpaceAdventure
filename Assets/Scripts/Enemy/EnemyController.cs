@@ -98,7 +98,7 @@ public class EnemyController : MonoBehaviour
         if (cantMoveByHimself) { explosion.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f); }
 
         //loot if enemy != enemySmall
-        else { if (Random.Range(0, 100) < 25) { Instantiate(loot[Random.Range(0, loot.Length)], transform.position, Quaternion.identity); } }
+        else { if (Random.Range(0, 100) < 35) { Instantiate(loot[Random.Range(0, loot.Length)], transform.position, Quaternion.identity); } }
 
         //sound
         if (r.isVisible) { SoundController.Instance.EnemyExplosion(); }

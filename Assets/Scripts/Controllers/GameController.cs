@@ -34,7 +34,7 @@ public class GameController : MonoBehaviour
     public GameObject shieldPref;
 
     //Game speedup during the game
-    [SerializeField] private float speedUpFactor = 0.0001f;
+    [SerializeField] private float speedUpFactor = 0.003f;
     [NonSerialized] public float gameSpeed = 1;
 
     //boss
@@ -121,9 +121,9 @@ public class GameController : MonoBehaviour
         //Control game acceleration
         if (!nowSceneMenu && isGameActive)
         {
-            if (gameSpeed > 2.2) { gameSpeed += speedUpFactor / 5; }
-            if (gameSpeed > 1.4f) { gameSpeed += speedUpFactor / 3; }
-            else { gameSpeed += speedUpFactor; }
+            if (gameSpeed > 2.2) { gameSpeed += speedUpFactor / 5 * Time.deltaTime; }
+            if (gameSpeed > 1.4f) { gameSpeed += speedUpFactor / 3 * Time.deltaTime; }
+            else { gameSpeed += speedUpFactor * Time.deltaTime; }
         }
     }
 

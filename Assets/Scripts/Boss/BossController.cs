@@ -45,9 +45,9 @@ public class BossController : MonoBehaviour
         if (transform.position.y > 5)
         {
             //Shake boss
-            transform.Translate(new Vector2(Random.Range(0.05f, -0.05f), -0.005f));
+            transform.Translate(new Vector2(Random.Range(5f * Time.deltaTime, -5f * Time.deltaTime), -0.8f * Time.deltaTime));
             transform.position = new Vector2(Mathf.Clamp(transform.position.x, -0.3f, 0.3f), transform.position.y);
-            yield return null;
+            yield return new WaitForFixedUpdate();
             StartCoroutine(firstEnter());
         }
         else
@@ -102,7 +102,7 @@ public class BossController : MonoBehaviour
     /// </summary>
     private IEnumerator explosionFX()
     {
-        Vector2 pos = new Vector2(UnityEngine.Random.Range(-1.5f, 1.5f), UnityEngine.Random.Range(3f, 5f));
+        Vector2 pos = new Vector2(Random.Range(-1.5f, 1.5f), Random.Range(3f, 5f));
         Instantiate(GameController.Instance.shipExplosion, pos, Quaternion.identity);
 
         yield return new WaitForSeconds(0.3f);
