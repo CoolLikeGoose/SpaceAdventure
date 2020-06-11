@@ -9,7 +9,23 @@ public class BossDronsController : MonoBehaviour
     private void Start()
     {
         Laser = BossController.Instance.DroneLaser;
-        StartCoroutine(WeaponShoot());
+        StartCoroutine(FirstEnter());
+    }
+
+    private IEnumerator FirstEnter()
+    {
+        if (transform.parent.position.y > 5)
+        {
+            transform.parent.Translate(new Vector2(0, -0.005f));
+            yield return null;
+            StartCoroutine(FirstEnter());
+        }
+        else
+        {
+            transform.parent.position = new Vector2(0, 5);
+
+            StartCoroutine(WeaponShoot());
+        }
     }
 
     /// <summary>
@@ -41,6 +57,10 @@ public class BossDronsController : MonoBehaviour
             if (hp == 0)
             {
                 BossController.Instance.DamageBoss(1);
+
+                Instantiate(GameController.Instance.shipExplosion, transform.position, Quaternion.identity);
+                SoundController.Instance.EnemyExplosion();
+
                 Destroy(gameObject);
             }
         }

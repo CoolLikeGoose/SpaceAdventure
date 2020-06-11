@@ -133,7 +133,7 @@ public class BossController : MonoBehaviour
 
     private IEnumerator SecondPhase()
     {
-        GameObject drones = Instantiate(Drones, transform.position, Quaternion.identity);
+        GameObject drones = Instantiate(Drones, new Vector2(0, 10), Quaternion.identity);
 
         shieldBar.SetActive(true);
         isFighting = false;
