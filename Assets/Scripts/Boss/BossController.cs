@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections;
-using System.Threading;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,15 +10,20 @@ public class BossController : MonoBehaviour
     public static BossController Instance { get; private set; }
 
     //Boss mustnt take damage before firstEnter method doesnt end
-    [NonSerialized] public bool isFighting = false;
+    private bool isFighting = false;
+
+    private Coroutine currentPhase;
 
     //controls the players health
     private float maxHp = 50;
     private float hp;
     [SerializeField] private Image healthBar;
+    [SerializeField] private GameObject shieldBar;
 
     //Prefabs
     [SerializeField] private GameObject BossLaser;
+    public GameObject DroneLaser;
+    [SerializeField] private GameObject Drones;
 
     private void Awake()
     {
@@ -57,14 +62,20 @@ public class BossController : MonoBehaviour
             isFighting = true;
             transform.position = new Vector2(0, 5);
 
-            //Phase 1
-            StartCoroutine(WeaponShoot());
+            //Start battle
+            StartCoroutine(BossBattleProcess());
         }
     }
 
     private IEnumerator BossBattleProcess()
     {
-        return new WaitUntil(() => false);
+        currentPhase = StartCoroutine(FirstPhase());
+        yield return new WaitUntil(() => hp < maxHp / 10 * 6.6);
+        StopCoroutine(currentPhase);
+        currentPhase = StartCoroutine(SecondPhase());
+        yield return new WaitUntil(() => hp < maxHp / 10 * 3.3);
+        StopCoroutine(currentPhase);
+        //currentPhase = StartCoroutine();
     }
 
     /// <summary>
@@ -100,19 +111,35 @@ public class BossController : MonoBehaviour
         StartCoroutine(explosionFX());
     }
 
-    private IEnumerator WeaponShoot()
+    //
+    //PHASES
+    //
+    private IEnumerator FirstPhase()
     {
         Vector2 spawnLaser = new Vector2(0, 3);
 
         if (PlayerController.Instance == null) { yield break; }
-        Vector2 targetPos = PlayerController.Instance.gameObject.transform.position; 
+        Vector2 targetPos = PlayerController.Instance.gameObject.transform.position;
         targetPos -= spawnLaser;
         float angle = Mathf.Atan2(targetPos.y, targetPos.x) * Mathf.Rad2Deg + 90;
-        
+
         Instantiate(BossLaser, spawnLaser, Quaternion.AngleAxis(angle, Vector3.forward));
 
         yield return new WaitForSeconds(1f);
-        StartCoroutine(WeaponShoot());
+        currentPhase = StartCoroutine(FirstPhase());
+    }
+
+    private IEnumerator SecondPhase()
+    {
+        GameObject drones = Instantiate(Drones, transform.position, Quaternion.identity);
+
+        shieldBar.SetActive(true);
+        isFighting = false;
+
+        yield return new WaitUntil(() => drones.transform.childCount == 0);
+
+        shieldBar.SetActive(false);
+        isFighting = true;
     }
 
 
@@ -125,10 +152,20 @@ public class BossController : MonoBehaviour
         {
             Destroy(collision.gameObject);
 
-            hp--;
-
             if (hp <= 0) { StartCoroutine(BossBattleEnd()); }
-            else { healthBar.fillAmount = hp / maxHp; }
+            else { DamageBoss(0); }
         }
+    }
+
+    /// <summary>
+    /// Deals damage to the boss and displays its current hp on healthBar
+    /// </summary>
+    /// <param name="damageState">0 - damage from laser, 1 - damage from destroyed drone</param>
+    public void DamageBoss(int damageState)
+    {
+        if (damageState == 0) { hp -= 1; }
+        else { hp -= maxHp / 3 / 4; }
+
+        healthBar.fillAmount = hp / maxHp;
     }
 }

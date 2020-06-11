@@ -50,8 +50,6 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator WeaponShoot()
     {
-        //if (BossController.Instance != null && !BossController.Instance.isFighting) { yield return new WaitUntil(() => BossController.Instance.isFighting); }
-
         if (curWeaponIndex != 6 && curWeaponIndex != 7)
         {
             if (bulletsLeft <= 0) { curWeaponIndex = 0; }
