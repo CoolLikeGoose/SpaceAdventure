@@ -121,7 +121,7 @@ public class GameController : MonoBehaviour
     private void Update()
     {
         //speedup; max speedup = 5
-        if (!nowSceneMenu && gameSpeed < 3) { gameSpeed += speedUpFactor; }
+        if (!nowSceneMenu && isGameActive && gameSpeed < 3) { gameSpeed += speedUpFactor; }
     }
 
     //needs to call coroutine 

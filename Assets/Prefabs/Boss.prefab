@@ -353,6 +353,8 @@ MonoBehaviour:
   DroneLaser: {fileID: 7826298875461831839, guid: 890f4f8dd3e61b044b2b52813b09be9c,
     type: 3}
   Drones: {fileID: 1732963454950741044, guid: c864e3ab8c0447a4eaa0b27d5ad0a303, type: 3}
+  Asteroid: {fileID: 2985233921142733749, guid: 11d80084754a94945aa9eeb3f2a574d8,
+    type: 3}
 --- !u!60 &6771738202604821115
 PolygonCollider2D:
   m_ObjectHideFlags: 0

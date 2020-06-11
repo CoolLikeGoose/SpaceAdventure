@@ -24,6 +24,7 @@ public class BossController : MonoBehaviour
     [SerializeField] private GameObject BossLaser;
     public GameObject DroneLaser;
     [SerializeField] private GameObject Drones;
+    [SerializeField] private GameObject Asteroid;
 
     private void Awake()
     {
@@ -69,13 +70,20 @@ public class BossController : MonoBehaviour
 
     private IEnumerator BossBattleProcess()
     {
+        //1 phase
         currentPhase = StartCoroutine(FirstPhase());
         yield return new WaitUntil(() => hp < maxHp / 10 * 6.6);
         StopCoroutine(currentPhase);
+
+        //2 phase
         currentPhase = StartCoroutine(SecondPhase());
         yield return new WaitUntil(() => hp < maxHp / 10 * 3.3);
         StopCoroutine(currentPhase);
-        //currentPhase = StartCoroutine();
+
+        //3 phase
+        currentPhase = StartCoroutine(ThirdPhase());
+        yield return new WaitUntil(() => hp <= 0);
+        StopCoroutine(currentPhase);
     }
 
     /// <summary>
@@ -140,6 +148,21 @@ public class BossController : MonoBehaviour
 
         shieldBar.SetActive(false);
         isFighting = true;
+    }
+
+    private IEnumerator ThirdPhase()
+    {
+        Vector2 spawn = new Vector2(0, 3); 
+
+        if (PlayerController.Instance == null) { yield break; }
+        Vector2 targetPos = PlayerController.Instance.gameObject.transform.position;
+        targetPos -= spawn;
+        float angle = Mathf.Atan2(targetPos.y, targetPos.x) * Mathf.Rad2Deg + 90;
+
+        Instantiate(Asteroid, spawn, Quaternion.AngleAxis(angle, Vector3.forward));
+
+        yield return new WaitForSeconds(0.5f);
+        currentPhase = StartCoroutine(ThirdPhase());
     }
 
 
