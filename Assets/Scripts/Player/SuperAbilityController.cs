@@ -28,6 +28,7 @@ public class SuperAbilityController : MonoBehaviour
 
     public void ActivateAbility()
     {
+        SoundController.Instance.SpecialAbility();
         if (abilityType == 0) { ActivateDrones(); }
         else if (abilityType == 1) { ActivateShield(); }
         else { ActivateFastShooting(); }
@@ -44,8 +45,7 @@ public class SuperAbilityController : MonoBehaviour
 
     private void ActivateDrones()
     {
-        GameObject drone = Instantiate(GameController.Instance.dronePref, transform.position, Quaternion.identity);
-        drone.transform.SetParent(gameObject.transform);
+        Instantiate(GameController.Instance.dronePref, transform.position, Quaternion.identity, transform);
 
         weaponIndex = player.curWeaponIndex;
         player.curWeaponIndex = 7;    
@@ -66,8 +66,7 @@ public class SuperAbilityController : MonoBehaviour
         if (player.curShield != null) { Destroy(player.curShield.gameObject); }
 
         player.curShieldIndex = 3;
-        GameObject shield = Instantiate(player.shieldsPrefs[player.curShieldIndex], transform.position, Quaternion.identity);
-        shield.transform.SetParent(gameObject.transform);
+        GameObject shield = Instantiate(player.shieldsPrefs[player.curShieldIndex], transform.position, Quaternion.identity, transform);
 
         player.curShield = shield;
     }

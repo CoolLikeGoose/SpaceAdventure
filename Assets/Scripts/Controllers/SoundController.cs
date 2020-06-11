@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Xml.Serialization;
+using UnityEngine;
 
 /// <summary>
 /// Manages all changes in the sounds
@@ -81,6 +82,11 @@ public class SoundController : MonoBehaviour
     {
         if (isUp) { fXsource.PlayOneShot(shieldUp); }
         else { fXsource.PlayOneShot(shieldDown); }
+    }
+
+    public void SpecialAbility()
+    {
+        fXsource.PlayOneShot(bonusSound);
     }
 
     /// <summary>
