@@ -10,9 +10,10 @@ public class BossController : MonoBehaviour
     //Boss mustnt take damage before firstEnter method doesnt end
     private bool isFighting = false;
 
+    //Controls the current phase
     private Coroutine currentPhase;
 
-    //controls the players health
+    //controls the boss health
     private float maxHp = 100;
     private float hp;
     [SerializeField] private Image healthBar = null;
@@ -32,11 +33,6 @@ public class BossController : MonoBehaviour
     private void Start()
     {
         hp = maxHp;
-        StartBossBattle();
-    }
-
-    private void StartBossBattle()
-    {
         GameController.Instance.isGameActive = false;
         StartCoroutine(firstEnter());
     }
@@ -48,14 +44,14 @@ public class BossController : MonoBehaviour
     {
         if (transform.position.y > 5)
         {
-            transform.Translate(new Vector2(UnityEngine.Random.Range(0.05f, -0.05f), -0.005f));
+            //Shake boss
+            transform.Translate(new Vector2(Random.Range(0.05f, -0.05f), -0.005f));
             transform.position = new Vector2(Mathf.Clamp(transform.position.x, -0.3f, 0.3f), transform.position.y);
             yield return null;
             StartCoroutine(firstEnter());
         }
         else
         {
-            //StartCoroutine(BossBattleProcess());
             isFighting = true;
             transform.position = new Vector2(0, 5);
 
@@ -113,9 +109,11 @@ public class BossController : MonoBehaviour
         StartCoroutine(explosionFX());
     }
 
-    //
+    //******
     //PHASES
-    //
+    //******
+
+    //The boss shoots the player with large lasers
     private IEnumerator FirstPhase()
     {
         Vector2 spawnLaser = new Vector2(0, 3);
@@ -131,6 +129,7 @@ public class BossController : MonoBehaviour
         currentPhase = StartCoroutine(FirstPhase());
     }
 
+    //Boss summon drones and get shield
     private IEnumerator SecondPhase()
     {
         GameObject drones = Instantiate(Drones, new Vector2(0, 10), Quaternion.identity);
@@ -138,12 +137,14 @@ public class BossController : MonoBehaviour
         shieldBar.SetActive(true);
         isFighting = false;
 
+        //Invincibility until all drones alive
         yield return new WaitUntil(() => drones.transform.childCount == 0);
 
         shieldBar.SetActive(false);
         isFighting = true;
     }
 
+    //The boss shoots the player with asteroids
     private IEnumerator ThirdPhase()
     {
         Vector2 spawn = new Vector2(0, 3); 

@@ -12,6 +12,7 @@ public class BossDronsController : MonoBehaviour
         StartCoroutine(FirstEnter());
     }
 
+    //Better perfomance then Update()
     private IEnumerator FirstEnter()
     {
         if (transform.parent.position.y > 5)
@@ -35,11 +36,13 @@ public class BossDronsController : MonoBehaviour
     {
         Vector2 spawnLaser = transform.position;
 
+        //Aims on player
         if (PlayerController.Instance == null) { yield break; }
         Vector2 targetPos = PlayerController.Instance.gameObject.transform.position;
         targetPos -= spawnLaser;
         float angle = Mathf.Atan2(targetPos.y, targetPos.x) * Mathf.Rad2Deg + 90;
 
+        //Laser shot in player position
         Instantiate(Laser, spawnLaser, Quaternion.AngleAxis(angle, Vector3.forward));
 
         yield return new WaitForSeconds(2f);
@@ -54,6 +57,8 @@ public class BossDronsController : MonoBehaviour
             Instantiate(GameController.Instance.shipHitParticles, transform.position, Quaternion.identity);
 
             Destroy(collision.gameObject);
+
+            //when drone destroyed - boss get damage
             if (hp == 0)
             {
                 BossController.Instance.DamageBoss(1);

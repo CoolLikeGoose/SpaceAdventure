@@ -58,7 +58,7 @@ public class GameController : MonoBehaviour
                 GUIController.Instance.gameScoreSet = _score;
 
                 //when the boss appears (every 80 points)
-                if (score % 3 == 0) { Instantiate(boss, new Vector2(0, 8), Quaternion.identity); }
+                if (score % 80 == 0) { Instantiate(boss, new Vector2(0, 8), Quaternion.identity); }
             }
 
         }
