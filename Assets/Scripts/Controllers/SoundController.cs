@@ -1,5 +1,4 @@
-﻿using System.Xml.Serialization;
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
 /// Manages all changes in the sounds
@@ -12,6 +11,8 @@ public class SoundController : MonoBehaviour
     //sources
     [SerializeField] private AudioSource fXsource = null;
     [SerializeField] private AudioSource musicSource = null;
+
+    //Sounds
 
     [SerializeField] private AudioClip enemyExplosion = null;
     [SerializeField] private AudioClip playerExplosion = null;

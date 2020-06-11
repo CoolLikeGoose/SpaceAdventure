@@ -47,7 +47,7 @@ public static class DataController
     /// <summary>
     /// Delete data
     /// </summary>
-    /// <param name="file">score/coins</param>
+    /// <param name="file">score/coins/skins</param>
     public static void DeleteFile(string file)
     {
         string path = Application.persistentDataPath + $"/{file}.goose";
@@ -76,6 +76,9 @@ public static class DataController
         return null;
     }
 
+    /// <summary>
+    /// Append to file (new Line) bought skinIndex
+    /// </summary>
     public static void SaveBoughtSkins(int skinIndex)
     {
         string path = Application.persistentDataPath + $"/skins.goose";

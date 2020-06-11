@@ -37,13 +37,14 @@ public class ShopController : MonoBehaviour
         }
         foreach (int skinIndex in loadedSkins)
         {
+            //Reduce cost labels if ship is already bought
             shopButtons[skinIndex].transform.GetChild(1).gameObject.SetActive(false);
         }
     }
 
     public void BuySkin(int skinIndex)
     {
-        //check if already bought
+        //check if already bought and select them
         List<int> loadedSkins = DataController.LoadBoughtSkins();
         if (loadedSkins != null && loadedSkins.Contains(skinIndex)) { SaveSkinChange(skinIndex); return; }
 
@@ -57,6 +58,7 @@ public class ShopController : MonoBehaviour
             GUIController.Instance.coinSet = GameController.Instance.coins;
             DataController.SaveFile(GameController.Instance.coins, "coins");
 
+            //Reduce cost labels
             nowActiveBtn.transform.GetChild(1).gameObject.SetActive(false);
 
             DataController.SaveBoughtSkins(skinIndex);
@@ -75,6 +77,9 @@ public class ShopController : MonoBehaviour
         nowActiveBtn.GetComponent<Image>().color = new Color(255, 205, 0);
     }
 
+    /// <summary>
+    /// Set damage and save skin Index in PlayerPrefs
+    /// </summary>
     public void SaveSkinChange(int skinIndex)
     {
         GlowSelectedSkin(skinIndex);
@@ -90,6 +95,7 @@ public class ShopController : MonoBehaviour
         PlayerPrefs.Save();
     }
 
+    //Invoke from GUIController
     public void OnDeleteSkins()
     {
         //searh for all already purchased and Activate them price labels 
@@ -105,6 +111,7 @@ public class ShopController : MonoBehaviour
         SetDefaultSkin();
     }
 
+    //Set 1 skin as Default
     private void SetDefaultSkin()
     {
         shopButtons[0].transform.GetChild(1).gameObject.SetActive(false);

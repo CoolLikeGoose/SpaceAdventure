@@ -12,6 +12,9 @@ public class BossDronsController : MonoBehaviour
         StartCoroutine(WeaponShoot());
     }
 
+    /// <summary>
+    /// Coroutine that controls weapon shooting
+    /// </summary>
     private IEnumerator WeaponShoot()
     {
         Vector2 spawnLaser = transform.position;

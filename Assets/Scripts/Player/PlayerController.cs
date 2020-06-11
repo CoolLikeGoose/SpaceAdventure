@@ -8,11 +8,7 @@ using UnityEngine.EventSystems;
 /// </summary>
 public class PlayerController : MonoBehaviour
 {
-    //[SerializeField] private int skinIndex;
-
     public static PlayerController Instance { get; private set; }
-
-    private float smoothFactor = 7f;
 
     private GameObject[] weapons;
     [NonSerialized] public GameObject[] shieldsPrefs;
@@ -37,19 +33,23 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        // TODO: fix this (ship stuck in ability btn)
+        // ship movement
         Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         if (Input.GetMouseButton(0) && (!EventSystem.current.IsPointerOverGameObject(0) && !EventSystem.current.IsPointerOverGameObject() || 
-            (pos.y < -3 && GUIController.Instance.isAbilityActivated)))
+            (pos.y < -3 && SuperAbilityController.Instance.isAbilityActivated))) // ship shouldnt get stuck in the button, if Ability is not ready
         {
             pos = new Vector2(pos.x, pos.y + 1f);
-            transform.position = Vector2.Lerp(transform.position, pos, smoothFactor * Time.deltaTime);
+            transform.position = Vector2.Lerp(transform.position, pos, 7f * Time.deltaTime); // the ship shouldn't teleport to finger
         }
         if (Input.GetKey(KeyCode.Escape)) { GameController.Instance.GameOver("instantly"); }
     }
 
+    /// <summary>
+    /// Coroutine that controls weapon shooting
+    /// </summary>
     private IEnumerator WeaponShoot()
     {
+        //if ability change the players weapon, the player mustnt change the weapon himself
         if (curWeaponIndex != 6 && curWeaponIndex != 7)
         {
             if (bulletsLeft <= 0) { curWeaponIndex = 0; }

@@ -1,7 +1,9 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Manages player drones
+/// </summary>
 public class DroneController : MonoBehaviour
 {
     private void Start()
@@ -9,6 +11,9 @@ public class DroneController : MonoBehaviour
         StartCoroutine(WeaponShoot());
     }
 
+    /// <summary>
+    /// Coroutine that controls weapon shooting
+    /// </summary>
     private IEnumerator WeaponShoot()
     {
         SoundController.Instance.LaserShot(0);

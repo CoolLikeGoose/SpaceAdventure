@@ -50,6 +50,7 @@ public class AsteroidController : MonoBehaviour
         transform.Translate(new Vector2(0, speed * Time.deltaTime * GameController.Instance.gameSpeed));
     }
 
+    //rotate asteroid Sprite
     private void AsteroidRotate()
     {
         child.rotation *= Quaternion.AngleAxis(randomRotation * Time.deltaTime, new Vector3(0, 0, 1));
@@ -65,6 +66,9 @@ public class AsteroidController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Damage the asteroid and Instantiate hit particles
+    /// </summary>
     private void DamageAsteroid()
     {
         hp -= GameController.Instance.playerDamage;
@@ -74,6 +78,10 @@ public class AsteroidController : MonoBehaviour
         Instantiate(damage, transform.position, Quaternion.identity);
     }
 
+    //called from PlayerController, when shield collide with asteroid
+    /// <summary>
+    /// Destroy asteroid process (score, loot, explosion, sound)
+    /// </summary>
     public void DestroyAsteroid()
     {
         GameController.Instance.score++;

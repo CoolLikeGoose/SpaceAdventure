@@ -15,14 +15,14 @@ public class BossController : MonoBehaviour
     //controls the players health
     private float maxHp = 100;
     private float hp;
-    [SerializeField] private Image healthBar;
-    [SerializeField] private GameObject shieldBar;
+    [SerializeField] private Image healthBar = null;
+    [SerializeField] private GameObject shieldBar = null;
 
     //Prefabs
-    [SerializeField] private GameObject BossLaser;
+    [SerializeField] private GameObject BossLaser = null;
     public GameObject DroneLaser;
-    [SerializeField] private GameObject Drones;
-    [SerializeField] private GameObject Asteroid;
+    [SerializeField] private GameObject Drones = null;
+    [SerializeField] private GameObject Asteroid = null;
 
     private void Awake()
     {

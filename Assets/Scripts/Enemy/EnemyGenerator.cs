@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -20,20 +19,17 @@ public class EnemyGenerator : MonoBehaviour
     {
         if (!GameController.Instance.isGameActive) { yield return new WaitUntil(() => GameController.Instance.isGameActive); }
 
+        //standard enemy - asteroid
         GameObject toSpawn = enemyPrefs[0];
 
         //20% to spawn enemy instead of asteroid
         if (Random.Range(0, 100) < 20) { toSpawn = enemyPrefs[Random.Range(1, enemyPrefs.Length)]; }
 
+        //random x pos, const y pos
         Vector2 spawnPos = new Vector2(Random.Range(-2.3f, 2.3f), transform.position.y);
         Instantiate(toSpawn, spawnPos, Quaternion.identity);
 
-        if (GameController.Instance.isGameActive)
-        {
-            yield return new WaitForSeconds(GameController.Instance.enemySpawnDelay);
-            StartCoroutine(SpawnEnemy());
-        }
-
-        yield return null;
+        yield return new WaitForSeconds(GameController.Instance.enemySpawnDelay);
+        StartCoroutine(SpawnEnemy());
     }
 }

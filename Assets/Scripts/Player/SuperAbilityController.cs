@@ -11,10 +11,13 @@ public class SuperAbilityController : MonoBehaviour
     private PlayerController player;
 
     [Tooltip("0 - drones, 1 - shield, 2 - fastShooting")]
-    [SerializeField] private int abilityType;
+    [SerializeField] private int abilityType = 0;
 
     private int weaponIndex;
     private int shieldIndex;
+
+    //for GUI and Game Controllers
+    [NonSerialized] public bool isAbilityActivated;
 
     private void Awake()
     {

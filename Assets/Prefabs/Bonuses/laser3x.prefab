@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8619293651720550778}
   - component: {fileID: -9208578181594000904}
   - component: {fileID: 4467792143565312890}
+  - component: {fileID: 2750732634970663560}
   m_Layer: 0
   m_Name: laser3x
   m_TagString: capsule
@@ -145,3 +146,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.34, y: 0.33}
   m_EdgeRadius: 0
+--- !u!114 &2750732634970663560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4137646885803632226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d19ab7aa8783c44490d4cb15b0557d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sender: 2
+  hasChilds: 0
+  isAbilityLaser: 0
+  speedUp: 1

@@ -7,10 +7,18 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     [SerializeField] private GameObject Laser = null;
-    [SerializeField] private bool canFire;
-    [SerializeField] private bool cantMoveByHimself;
-    [SerializeField] private bool haveHp;
-    [SerializeField] private bool fastMove;
+
+    //if enemy has fire ability
+    [SerializeField] private bool canFire = false;
+
+    //for small-tripple enemy
+    [SerializeField] private bool cantMoveByHimself = false;
+
+    //for big enemy
+    [SerializeField] private bool haveHp = false;
+
+    //for the enemy the movement of which is z-shaped
+    [SerializeField] private bool fastMove = false;
 
     private float speed;
     private GameObject[] loot;
@@ -46,6 +54,9 @@ public class EnemyController : MonoBehaviour
         if (fastMove) { EnemyAdditionalMovement(); }
     }
 
+    /// <summary>
+    /// Coroutine that controls weapon shooting
+    /// </summary>
     private IEnumerator WeaponShoot()
     {
         if (r.isVisible) { SoundController.Instance.LaserShot(1); }
@@ -67,6 +78,9 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Reduce hp from big enemy and create particles
+    /// </summary>
     private void DamageEnemy()
     {
         hp -= GameController.Instance.playerDamage;
@@ -92,6 +106,9 @@ public class EnemyController : MonoBehaviour
         Destroy(gameObject);
     }
 
+    /// <summary>
+    /// Moves the enemy on z-shaped path
+    /// </summary>
     private void EnemyAdditionalMovement()
     {
         if ((movDirect == -1 && transform.position.x > 2.2f) || (movDirect == 1 && transform.position.x < -2.2f))

@@ -8,6 +8,8 @@ using System;
 /// </summary>
 public class GameController : MonoBehaviour
 {
+    public static GameController Instance { get; private set; }
+
     //enemy settings
     public float EnemySpeed = -.1f;
     public float enemySpawnDelay = .25f;
@@ -36,9 +38,9 @@ public class GameController : MonoBehaviour
     [NonSerialized] public float gameSpeed = 1;
 
     //boss
-    [SerializeField] private GameObject boss;
+    [SerializeField] private GameObject boss = null;
 
-    //
+    //Controls some processes like enemyGenerators ability to spawn enemy 
     [NonSerialized] public bool isGameActive = true;
 
     //score and coins
@@ -63,6 +65,7 @@ public class GameController : MonoBehaviour
     }
     private int _score = 0;
     [NonSerialized] public int maxScore;
+
     private int coinsValue = 0;
     public int coins
     {
@@ -74,25 +77,17 @@ public class GameController : MonoBehaviour
         }
     }
 
-    //music DELETE
-    [NonSerialized] public bool fxMuted = false;
-    [NonSerialized] public bool musicMuted = false;
-
     //check if now scene == menu
     [NonSerialized] public bool nowSceneMenu;
 
+    //Damage depends from selected skin and controlled from ShopController
     [NonSerialized] public int playerDamage = 1;
-
-    //controled by ShopController
-    public GameObject activeShip = null;
-
-    public static GameController Instance { get; private set; }
 
     private void Awake()
     {
-        nowSceneMenu = SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(0);
-
         Instance = this;
+
+        nowSceneMenu = SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(0);
 
         maxScore = DataController.LoadFile("score");
 
@@ -101,17 +96,16 @@ public class GameController : MonoBehaviour
     
     private void Start()
     {
-        //display maxScore and coins if now screen - menu
         if (nowSceneMenu)
         {
             GUIController.Instance.scoreSet = maxScore;
-            GUIController.Instance.coinSet = coins;
         }
         else
         {
             Instantiate(ShopController.Instance.shipSkins[PlayerPrefs.GetInt("activeShipSkin", 0)], new Vector2(0, -3), Quaternion.identity);
 
-            GUIController.Instance.isAbilityActivated = true;
+            //start reload process
+            SuperAbilityController.Instance.isAbilityActivated = true;
             StartCoroutine(GUIController.Instance.ReloadSuperAbility());
         }
 
@@ -124,7 +118,7 @@ public class GameController : MonoBehaviour
 
     private void Update()
     {
-        //speedup; max speedup = 5
+        //Control game acceleration
         if (!nowSceneMenu && isGameActive)
         {
             if (gameSpeed > 2.2) { gameSpeed += speedUpFactor / 5; }

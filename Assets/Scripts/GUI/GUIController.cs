@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Xml.Schema;
-using System.Xml.Serialization;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 
 /// <summary>
@@ -13,36 +9,36 @@ using UnityEngine.UI;
 /// </summary>
 public class GUIController : MonoBehaviour
 {
-    //
-
     public static GUIController Instance { get; private set; }
 
+    //windows
     [SerializeField] private GameObject main = null;
     [SerializeField] private GameObject settings = null;
     [SerializeField] private GameObject shop = null;
     [SerializeField] private GameObject info = null;
+    [SerializeField] private GameObject gameOverPopup = null;
 
+    //Icons for sound settings
     [SerializeField] private Sprite unMuteIcon = null;
     [SerializeField] private Sprite muteIcon = null;
 
+    //Btns Images to change 
     [SerializeField] private Image ObjFXmuteIcon = null;
     [SerializeField] private Image ObjMusicMuteIcon = null;
 
-    [SerializeField] private GameObject gameOverPopup = null;
-
+    //Stats labels
     [SerializeField] private Text scoreLabel = null;
     [SerializeField] private Text coinsLabel = null;
     [SerializeField] private Text finalScoreLabel = null;
 
-    [SerializeField] private Image reloadSprite;
-    [SerializeField] private Image reloadSpriteBackground;
+    //Ability btns Images that indicate ability state
+    [SerializeField] private Image reloadSprite = null;
+    [SerializeField] private Image reloadSpriteBackground = null;
+
+    //Ability sprites
     [SerializeField] private Sprite reloadSpriteDrones = null;
     [SerializeField] private Sprite reloadSpriteShield = null;
     [SerializeField] private Sprite reloadSpriteBoost = null;
-
-
-    // TODO: create another class for this
-    [NonSerialized] public bool isAbilityActivated;
 
     //some properties for update GUI
     public int gameOver
@@ -62,7 +58,7 @@ public class GUIController : MonoBehaviour
     {
         set
         {
-            if (value < 100) { scoreLabel.text = $"score\n{value.ToString("000")}"; }
+            if (value < 1000) { scoreLabel.text = $"score\n{value:000}"; }
             else { scoreLabel.text = $"score\n{value}"; }
         }
     }
@@ -71,7 +67,7 @@ public class GUIController : MonoBehaviour
         set
         {
             if (GameController.Instance.nowSceneMenu) { coinsLabel.text = $"x {value}"; }
-            else { coinsLabel.text = value.ToString(); }
+            else if (value < 1000) { coinsLabel.text = value.ToString(); }
         }
     }
 
@@ -104,7 +100,6 @@ public class GUIController : MonoBehaviour
     {
         Instance = this;
         activeWindow = main;
-        //reloadSprite.sprite = reloadSpriteDrones;
     }
 
     //Buttons methods
@@ -144,10 +139,10 @@ public class GUIController : MonoBehaviour
         ShopController.Instance.OnDeleteSkins();
     }
 
-    //ship superAbility
+    //Ship super ability animations
     public void OnSuperAbility()
     {
-        if (!isAbilityActivated) { StartCoroutine(UsingSuperAbility()); }
+        if (!SuperAbilityController.Instance.isAbilityActivated) { StartCoroutine(UsingSuperAbility()); }
     }
 
     public IEnumerator ReloadSuperAbility()
@@ -162,17 +157,16 @@ public class GUIController : MonoBehaviour
             reloadSprite.fillAmount += 0.001f / 3f;
             yield return new WaitForSeconds(0.01f);
         }
-        isAbilityActivated = false;
+        SuperAbilityController.Instance.isAbilityActivated = false;
 
         reloadSprite.color = new Color(255, 255, 0);
     }
 
     private IEnumerator UsingSuperAbility()
     {
-        //PlayerController.Instance.SuperShieldActivate();
         SuperAbilityController.Instance.ActivateAbility();
 
-        isAbilityActivated = true;
+        SuperAbilityController.Instance.isAbilityActivated = true;
 
         while (reloadSprite.fillAmount > 0)
         {
@@ -181,7 +175,6 @@ public class GUIController : MonoBehaviour
             yield return new WaitForSeconds(0.01f);
         }
 
-        //PlayerController.Instance.SuperShieldDown();
         SuperAbilityController.Instance.DeactivateAbility();
 
         StartCoroutine(ReloadSuperAbility());
@@ -217,7 +210,9 @@ public class GUIController : MonoBehaviour
         }
         activeWindow.SetActive(true);
     }
-    
+
+    //Hide or show Coins label
+    //if condition necessary that when the method is called not from the main menu, an error does not occur
     private void turnCoinsLabel(bool state)
     {
         if (GameController.Instance.nowSceneMenu)
@@ -225,10 +220,11 @@ public class GUIController : MonoBehaviour
             coinsLabel.transform.parent.gameObject.SetActive(state);
         }
     }
+
     /// <summary>
-    /// Mute music
+    /// Mute music and display that on GUI
     /// </summary>
-    /// <param name="state">0 equal false; 1 equal true; 2 to get current state from audio source</param>
+    /// <param name="state">0 equal false(OFF); 1 equal true(ON); 2 to get current state from audio source</param>
     public void OnMusicMute(int state)
     {
 
@@ -249,7 +245,6 @@ public class GUIController : MonoBehaviour
             SoundController.Instance.musicMute = true;
         }
 
-        //if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("menu")) { ObjMusicMuteIcon.sprite = nowSprite; };
         ObjMusicMuteIcon.sprite = nowSprite;
 
         PlayerPrefs.SetInt("musicMuted", state);
@@ -257,9 +252,9 @@ public class GUIController : MonoBehaviour
     }
 
     /// <summary>
-    /// Mute sound FX
+    /// Mute sound FX and display that on GUI
     /// </summary>
-    /// <param name="state">0 equal false; 1 equal true; 2 to get current state from audio source</param>
+    /// <param name="state">0 equal false(OFF; 1 equal true(ON); 2 to get current state from audio source</param>
     public void OnFXMute(int state)
     {
 
@@ -280,8 +275,7 @@ public class GUIController : MonoBehaviour
         {
             SoundController.Instance.soundFXMute = true;
         }
-
-        //if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("menu")) { ObjFXmuteIcon.sprite = nowSprite; };
+        
         ObjFXmuteIcon.sprite = nowSprite;
 
         PlayerPrefs.SetInt("fxMuted", state);

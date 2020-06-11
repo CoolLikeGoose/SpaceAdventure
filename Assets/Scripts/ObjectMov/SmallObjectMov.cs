@@ -7,8 +7,14 @@ public class SmallObjectMov : MonoBehaviour
 {
     [Range(0, 2)] [Tooltip("0 - player; 1 - enemy; 2 - coin")]
     [SerializeField] private int sender = 0;
+
+    //Destroy the object when childCount == 0
     [SerializeField] private bool hasChilds = false;
+
+    //Added additional movement for 3 super ability
     [SerializeField] private bool isAbilityLaser = false;
+
+    //Additional option for boss lasers
     [SerializeField] private float speedUp = 1;
 
     private float speed;
@@ -29,9 +35,9 @@ public class SmallObjectMov : MonoBehaviour
         if (hasChilds && transform.childCount == 0 || transform.position.y < -15) { Destroy(gameObject); }
     }
 
+    //L and R lasers should move at 45 degrees
     private void AbilityAdditionalMovement()
     {
-
         Transform lchild = transform.Find("LaserL");
         Transform rchild = transform.Find("LaserR");
 
