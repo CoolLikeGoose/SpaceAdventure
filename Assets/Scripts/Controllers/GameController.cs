@@ -42,6 +42,9 @@ public class GameController : MonoBehaviour
     [NonSerialized] public bool isGameActive = true;
 
     //score and coins
+    /// <summary>
+    /// Controls the number of scores and display them, also Instantiate the boss
+    /// </summary>
     public int score    
     {
         get { return _score; }
@@ -52,7 +55,8 @@ public class GameController : MonoBehaviour
                 _score = value;
                 GUIController.Instance.gameScoreSet = _score;
 
-                if (score == 5) { Instantiate(boss, new Vector2(0, 8), Quaternion.identity); }
+                //when the boss appears (every 80 points)
+                if (score % 80 == 0) { Instantiate(boss, new Vector2(0, 8), Quaternion.identity); }
             }
 
         }
@@ -121,7 +125,12 @@ public class GameController : MonoBehaviour
     private void Update()
     {
         //speedup; max speedup = 5
-        if (!nowSceneMenu && isGameActive && gameSpeed < 3) { gameSpeed += speedUpFactor; }
+        if (!nowSceneMenu && isGameActive)
+        {
+            if (gameSpeed > 2.2) { gameSpeed += speedUpFactor / 5; }
+            if (gameSpeed > 1.4f) { gameSpeed += speedUpFactor / 3; }
+            else { gameSpeed += speedUpFactor; }
+        }
     }
 
     //needs to call coroutine 

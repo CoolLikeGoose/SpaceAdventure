@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using UnityEditor.Experimental.GraphView;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,7 +13,7 @@ public class BossController : MonoBehaviour
     private Coroutine currentPhase;
 
     //controls the players health
-    private float maxHp = 50;
+    private float maxHp = 100;
     private float hp;
     [SerializeField] private Image healthBar;
     [SerializeField] private GameObject shieldBar;
@@ -40,8 +38,6 @@ public class BossController : MonoBehaviour
     private void StartBossBattle()
     {
         GameController.Instance.isGameActive = false;
-
-        Debug.Log("Boss battle started");
         StartCoroutine(firstEnter());
     }
 
@@ -93,8 +89,6 @@ public class BossController : MonoBehaviour
     {
         isFighting = false;
         healthBar.fillAmount = 0;
-
-        Debug.Log("Boss battle ends");
 
         StartCoroutine(explosionFX());
         yield return new WaitForSeconds(3f);
@@ -161,7 +155,7 @@ public class BossController : MonoBehaviour
 
         Instantiate(Asteroid, spawn, Quaternion.AngleAxis(angle, Vector3.forward));
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         currentPhase = StartCoroutine(ThirdPhase());
     }
 
